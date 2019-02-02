@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Создаем объект Intent для вызова новой Activity
         Intent intent = new Intent(this, MenuActivity.class);
         // Получаем текстовое поле в текущей Activity
-        EditText editText = (EditText) findViewById(R.id.emailInput);
+        EditText editText = findViewById(R.id.emailInput);
         // Получае текст данного текстового поля
         String message = editText.getText().toString();
         // Добавляем с помощью свойства putExtra объект - первый параметр - ключ,
