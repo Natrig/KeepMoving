@@ -1,21 +1,19 @@
 <resources>
     <string name="app_name">KeepMoving</string>
+
+    <!-- String related to Login activity -->
     <string name="log_in">Вход</string>
     <string name="exist_account">Нет аккаунта?</string>
     <string name="sign_in">Зарегистрироваться</string>
     <string name="email_label">Email</string>
     <string name="password_label">Пароль</string>
-    <string name="title_activity_login">Sign in</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+
+    <!-- String related to SignIn activity -->
+    <string name="register">Регистрация</string>
+    <string name="name_label">Имя</string>
+    <string name="surname_label">Фамилия</string>
+    <string name="gender_label">Пол</string>
+    <string name="phone_label">Мобильный номер</string>
+    <string name="birth_label">Год рождения</string>
+    <string name="confirmation_label">Подтверждение</string>
 </resources>

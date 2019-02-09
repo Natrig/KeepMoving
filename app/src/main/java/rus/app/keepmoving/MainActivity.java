@@ -1,8 +1,8 @@
 package rus.app.keepmoving;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,17 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
     // Метод авторизации
     public void login(View view) {
-        // действия, совершаемые после нажатия на кнопку
-        // Создаем объект Intent для вызова новой Activity
         Intent intent = new Intent(this, MenuActivity.class);
-        // Получаем текстовое поле в текущей Activity
         EditText editText = findViewById(R.id.emailInput);
-        // Получае текст данного текстового поля
+
         String message = editText.getText().toString();
-        // Добавляем с помощью свойства putExtra объект - первый параметр - ключ,
-        // второй параметр - значение этого объекта
+
         intent.putExtra(EXTRA_MESSAGE, message);
-        // запуск activity
+        startActivity(intent);
+    }
+
+    public void goSignIn(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
+
         startActivity(intent);
     }
 }

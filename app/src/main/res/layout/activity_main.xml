@@ -8,12 +8,13 @@
 
     <RelativeLayout
         android:layout_above="@+id/loginLayout"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_centerInParent="true">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="20dp"
             android:src="@mipmap/ic_launcher_foreground"/>
     </RelativeLayout>
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/password_label"
             android:inputType="textPassword" />
@@ -47,14 +49,13 @@
             android:id="@+id/button"
             android:layout_below="@+id/passwordInput"
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/kp_button"
             android:text="@string/log_in"
             android:textAllCaps="false"
             android:onClick="login"/>
-
 
         <RelativeLayout
             android:id="@+id/signInLayout"
@@ -62,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             >
             <TextView
@@ -78,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/sign_in"
-                android:textColor="#80D8FF" />
+                android:textColor="#80D8FF"
+                android:onClick="goSignIn"/>
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
