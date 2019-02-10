@@ -9,19 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include layout="@layout/top_bar" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/middleBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar">
+
+        <include layout="@layout/center_page" />
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
+    <include layout="@layout/bottom_bar" />
 </RelativeLayout>
