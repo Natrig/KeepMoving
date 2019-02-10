@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+
+    <TextView
+        android:id="@+id/profileTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#546e7a"
+        android:textSize="25sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/profile" />
+
+    <RelativeLayout
+        android:id="@+id/logoLayout"
+        android:layout_below="@id/profileTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/logoImg"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/ic_launcher_foreground"
+            android:contentDescription="@string/app_name" />
+
+        <RelativeLayout
+            android:id="@+id/mainInfo"
+            android:layout_toRightOf="@+id/logoImg"
+            android:layout_toEndOf="@id/logoImg"
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/surnameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="18sp"
+                android:hint="@string/surname_label"
+                android:inputType="textPersonName"/>
+            <TextView
+                android:id="@+id/nameInput"
+                android:layout_below="@+id/surnameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="18sp"
+                android:hint="@string/name_label"
+                android:inputType="textPersonName" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/logoLayout"
+        android:background="@color/colorPrimary">
+
+    </RelativeLayout>
+</RelativeLayout>

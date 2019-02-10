@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">KeepMoving</string>
+    <string name="loading">Загрузка…</string>
 
     <!-- String related to Login activity -->
     <string name="log_in">Вход</string>
     <string name="exist_account">Нет аккаунта?</string>
-    <string name="sign_in">Зарегистрироваться</string>
+    <string name="create_account">Создать аккаунт</string>
     <string name="email_label">Email</string>
     <string name="password_label">Пароль</string>
 
@@ -16,4 +17,7 @@
     <string name="phone_label">Мобильный номер</string>
     <string name="birth_label">Год рождения</string>
     <string name="confirmation_label">Подтверждение</string>
+
+    <!-- String related to Profile Activity -->
+    <string name="profile">Профиль</string>
 </resources>
