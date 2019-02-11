@@ -1,5 +1,6 @@
 package rus.app.keepmoving;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -37,7 +38,7 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        fields = new ArrayList<EditText>();
+        fields = new ArrayList<>();
 
         mSurnameField = findViewById(R.id.surnameInput);
         fields.add(mSurnameField);
@@ -69,9 +70,8 @@ public class SignUpActivity extends BaseActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            // TODO
-//            Intent intent = new Intent(this, MenuActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
         }
     }
 
