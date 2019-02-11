@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BaseActivity"></activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".CreateTrip.CreateActivity" />
+        <activity android:name=".Search.SearchActivity" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".Profile.ProfileActivity" />
+        <activity android:name=".SignUp.SignUpActivity" />
+        <activity android:name=".Menu.MenuActivity" />
+        <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

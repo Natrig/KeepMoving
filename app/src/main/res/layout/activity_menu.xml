@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/top_bar" />
+        <include layout="@layout/layout_top_bar" />
 
     </RelativeLayout>
 
@@ -19,9 +19,9 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/topBar">
 
-        <include layout="@layout/center_page" />
+        <include layout="@layout/layout_center_page" />
 
     </RelativeLayout>
 
-    <include layout="@layout/bottom_bar" />
+    <include layout="@layout/layout_bottom_bar" />
 </RelativeLayout>
