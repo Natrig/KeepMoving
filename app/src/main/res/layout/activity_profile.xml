@@ -1,64 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/profileTitle"
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="#546e7a"
-        android:textSize="25sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/profile" />
+        android:layout_height="50dp"
+        android:background="@drawable/border_bottom">
+
+        <TextView
+            android:id="@+id/profileTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/profile"
+            android:textAlignment="center"
+            android:textColor="#546e7a"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/logoLayout"
-        android:layout_below="@id/profileTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/logoImg"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/ic_launcher_foreground"
-            android:contentDescription="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title">
 
-        <RelativeLayout
-            android:id="@+id/mainInfo"
-            android:layout_toRightOf="@+id/logoImg"
-            android:layout_toEndOf="@id/logoImg"
+        <LinearLayout
+            android:id="@+id/top_info"
             android:layout_width="match_parent"
-            android:layout_marginRight="20dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/surnameInput"
-                android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bottom_inherited"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:weightSum="100">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="25">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerVertical="true"
+                    app:civ_border_color="@color/colorBlack"
+                    app:civ_border_width="2dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="18sp"
-                android:hint="@string/surname_label"
-                android:inputType="textPersonName"/>
-            <TextView
-                android:id="@+id/nameInput"
-                android:layout_below="@+id/surnameInput"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="75">
+
+                <include layout="@layout/snippet_top_profile" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/top_info"
+            android:orientation="vertical">
+
+            <!-- Birth section -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="18sp"
-                android:hint="@string/name_label"
-                android:inputType="textPersonName" />
-        </RelativeLayout>
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_date" />
+
+                <TextView
+                    android:id="@+id/birth_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_centerVertical="true"
+                    android:text="@string/birth_label"/>
+            </RelativeLayout>
+
+            <!-- Phone section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_phone" />
+
+                <TextView
+                    android:id="@+id/phone_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorPrimaryText"
+                    android:text="@string/phone_label"/>
+
+            </RelativeLayout>
+
+            <!-- Email section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_email" />
+
+                <TextView
+                    android:id="@+id/email_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_centerVertical="true"
+                    android:text="@string/email_label"/>
+
+            </RelativeLayout>
+
+            <!-- Description section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_description" />
+
+                <TextView
+                    android:id="@+id/description_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_centerVertical="true"
+                    android:text="@string/description_label"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/logoLayout"
-        android:background="@color/colorPrimary">
-
-    </RelativeLayout>
+    <include layout="@layout/layout_bottom_bar" />
 </RelativeLayout>

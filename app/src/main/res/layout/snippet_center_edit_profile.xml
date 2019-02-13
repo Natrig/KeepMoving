@@ -1,0 +1,217 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:civ_border_color="@color/colorBlack"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/change_image"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:text="@string/change_image"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+
+            <!-- Name section -->
+            <RelativeLayout
+                android:id="@+id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/change_image"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_contact" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText
+                        android:id="@+id/nameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/name_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <!-- Surname section -->
+            <RelativeLayout
+                android:id="@+id/relLayout2"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/relLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_contact" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText 
+                        android:id="@+id/surnameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/surname_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <!-- Birth year section -->
+            <RelativeLayout
+                android:id="@+id/relLayout3"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/relLayout2"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_date" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText
+                        android:id="@+id/yearInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/birth_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <!-- Phone section -->
+            <RelativeLayout
+                android:id="@+id/relLayout4"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/relLayout3"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_phone" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText
+                        android:id="@+id/phoneInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/phone_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <!-- Email section -->
+            <RelativeLayout
+                android:id="@+id/relLayout5"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/relLayout4"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_email" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText
+                        android:id="@+id/emailInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/email_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+            <!-- Description section -->
+            <RelativeLayout
+                android:id="@+id/relLayout6"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/relLayout5"
+                android:background="@drawable/border_bottom_inherited">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_description" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp">
+                    <EditText
+                        android:id="@+id/descriptionInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textNoSuggestions"
+                        android:hint="@string/description_label"
+                        android:background="@null" />
+                </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</merge>

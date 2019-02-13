@@ -17,6 +17,7 @@ public class MenuActivity extends BaseActivity {
 
         Log.d(TAG, "onCreate: creating.");
 
+        initImageLoader();
         setupBottomNavBar(MenuActivity.this, ACTIVITY_NUM);
     }
 }

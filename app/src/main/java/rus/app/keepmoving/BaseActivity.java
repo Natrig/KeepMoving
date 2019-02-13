@@ -14,11 +14,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import rus.app.keepmoving.CreateTrip.CreateActivity;
 import rus.app.keepmoving.Menu.MenuActivity;
 import rus.app.keepmoving.Profile.ProfileActivity;
 import rus.app.keepmoving.Search.SearchActivity;
+import rus.app.keepmoving.Util.KPImageLoader;
 
 public class BaseActivity extends AppCompatActivity {
     private static final String TAG = "BaseActivity";
@@ -94,4 +96,10 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
+    protected void initImageLoader() {
+        KPImageLoader kpImageLoader = new  KPImageLoader(BaseActivity.this);
+        ImageLoader.getInstance().init(kpImageLoader.getConfig());
+    }
+
 }
