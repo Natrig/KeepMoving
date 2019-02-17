@@ -21,11 +21,11 @@
 
             <TextView
                 android:id="@+id/change_image"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_image"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
                 android:text="@string/change_image"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
@@ -39,6 +39,7 @@
                 android:layout_below="@id/change_image"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -51,24 +52,26 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
+
                     <EditText
                         android:id="@+id/nameInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/name_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
             <!-- Surname section -->
             <RelativeLayout
                 android:id="@+id/relLayout2"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/relLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_below="@id/relLayout1"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -81,24 +84,26 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
-                    <EditText 
+
+                    <EditText
                         android:id="@+id/surnameInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/surname_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
             <!-- Birth year section -->
             <RelativeLayout
                 android:id="@+id/relLayout3"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/relLayout2"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -111,24 +116,26 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
+
                     <EditText
                         android:id="@+id/yearInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/birth_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
             <!-- Phone section -->
             <RelativeLayout
                 android:id="@+id/relLayout4"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/relLayout3"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -141,24 +148,26 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
+
                     <EditText
                         android:id="@+id/phoneInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/phone_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
             <!-- Email section -->
             <RelativeLayout
                 android:id="@+id/relLayout5"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@id/relLayout4"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -171,13 +180,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
+
                     <EditText
                         android:id="@+id/emailInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/email_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
@@ -185,10 +195,11 @@
             <RelativeLayout
                 android:id="@+id/relLayout6"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="50dp"
                 android:layout_below="@id/relLayout5"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -201,17 +212,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp">
+
                     <EditText
                         android:id="@+id/descriptionInput"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textNoSuggestions"
+                        android:background="@null"
                         android:hint="@string/description_label"
-                        android:background="@null" />
+                        android:inputType="textNoSuggestions" />
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
-
         </RelativeLayout>
-
     </ScrollView>
 </merge>

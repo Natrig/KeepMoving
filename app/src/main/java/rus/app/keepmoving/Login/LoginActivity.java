@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rus.app.keepmoving.BaseActivity;
+import rus.app.keepmoving.Menu.MenuActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.SignUp.SignUpActivity;
 
@@ -57,8 +58,9 @@ public class LoginActivity extends BaseActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-//            Intent intent = new Intent(this, MenuActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -76,7 +78,8 @@ public class LoginActivity extends BaseActivity {
                         if (task.isSuccessful()) {
                             onStart();
                         } else {
-                            Toast.makeText(LoginActivity.this, "Не удалось авторизоваться.",
+                            Toast.makeText(LoginActivity.this,
+                                    R.string.failed + " : " +task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         }
 

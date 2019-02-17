@@ -32,7 +32,7 @@ public class KPDatePicker extends DialogFragment
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.YEAR, year);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
         dateInput.setText(sdf.format(c.getTime()));
     }

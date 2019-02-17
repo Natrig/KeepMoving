@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "752161664675",
+    "firebase_url": "https://keep-moving-app.firebaseio.com",
+    "project_id": "keep-moving-app",
+    "storage_bucket": "keep-moving-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752161664675:android:75801f27b86b041a",
+        "android_client_info": {
+          "package_name": "rus.app.keepmoving"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752161664675-gjf3st97j04d3p6nrck62rcaeetv42sj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rus.app.keepmoving",
+            "certificate_hash": "7954f5d6614e02f813877320afa24856d609247f"
+          }
+        },
+        {
+          "client_id": "752161664675-mhiggtvq271qdea5dapan91jrkfb1n70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPkB0cK8IDShPweB2iwE0Vkq6lyZNXobw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752161664675-mhiggtvq271qdea5dapan91jrkfb1n70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

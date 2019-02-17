@@ -69,18 +69,19 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/top_info"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <!-- Birth section -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -91,17 +92,18 @@
                     android:id="@+id/birth_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:textColor="@color/colorPrimaryText"
-                    android:layout_centerVertical="true"
-                    android:text="@string/birth_label"/>
+                    android:text="@string/birth_label"
+                    android:textColor="@color/colorPrimaryText" />
             </RelativeLayout>
 
             <!-- Phone section -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -112,11 +114,11 @@
                     android:id="@+id/phone_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/colorPrimaryText"
-                    android:text="@string/phone_label"/>
+                    android:text="@string/phone_label"
+                    android:textColor="@color/colorPrimaryText" />
 
             </RelativeLayout>
 
@@ -124,6 +126,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -134,11 +137,11 @@
                     android:id="@+id/email_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:textColor="@color/colorPrimaryText"
-                    android:layout_centerVertical="true"
-                    android:text="@string/email_label"/>
+                    android:text="@string/email_label"
+                    android:textColor="@color/colorPrimaryText" />
 
             </RelativeLayout>
 
@@ -146,6 +149,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -156,12 +160,26 @@
                     android:id="@+id/description_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:textColor="@color/colorPrimaryText"
-                    android:layout_centerVertical="true"
-                    android:text="@string/description_label"/>
+                    android:text="@string/description_label"
+                    android:textColor="@color/colorPrimaryText" />
+            </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="25dp"
+                    android:onClick="logout"
+                    android:textColor="@color/colorGrey"
+                    android:text="@string/logout"
+                    android:background="@drawable/grey_border"/>
             </RelativeLayout>
 
 

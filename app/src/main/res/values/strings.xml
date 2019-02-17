@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">KeepMoving</string>
     <string name="loading">Загрузка…</string>
+    
+    <!-- Firebase DB names -->
+    <string name="db_user_account">user_account</string>
 
     <!-- String related to Login activity -->
     <string name="log_in">Вход</string>
@@ -8,6 +11,8 @@
     <string name="create_account">Создать аккаунт</string>
     <string name="email_label">Email</string>
     <string name="password_label">Пароль</string>
+    <string name="logout">Выход</string>
+    <string name="failed">Прервано</string>
 
     <!-- String related to SignIn activity -->
     <string name="register">Регистрация</string>

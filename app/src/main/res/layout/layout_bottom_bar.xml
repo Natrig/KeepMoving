@@ -7,9 +7,9 @@
         android:layout_alignParentBottom="true">
 
         <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+            android:id="@+id/bottomNavBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/bottomNavBar"
             android:background="@drawable/border_top"
             app:menu="@menu/bottom_bar_menu">
 

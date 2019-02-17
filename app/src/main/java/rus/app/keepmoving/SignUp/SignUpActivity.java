@@ -15,11 +15,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rus.app.keepmoving.BaseActivity;
+import rus.app.keepmoving.Entities.UserAccount;
 import rus.app.keepmoving.Menu.MenuActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.KPDatePicker;
@@ -28,6 +31,8 @@ public class SignUpActivity extends BaseActivity {
     private static final String TAG = "SignUpActivity";
 
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
 
     List<EditText> fields;
     private EditText mNameField;
@@ -70,6 +75,8 @@ public class SignUpActivity extends BaseActivity {
         fields.add(mConfirmField);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference();
     }
 
     @Override
@@ -80,6 +87,7 @@ public class SignUpActivity extends BaseActivity {
         if (currentUser != null) {
             Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -95,11 +103,11 @@ public class SignUpActivity extends BaseActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            saveUserInfo();
+                            saveUserInfo(mAuth.getCurrentUser().getUid());
                             onStart();
                         } else {
                             Toast.makeText(SignUpActivity.this,
-                                    "Не удалось создать аккаунт", Toast.LENGTH_SHORT).show();
+                                    "Не удалось создать аккаунт: " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
 
                         hideProgressDialog();
@@ -107,8 +115,21 @@ public class SignUpActivity extends BaseActivity {
                 });
     }
 
-    public void saveUserInfo() {
+    public void saveUserInfo(String userID) {
+        UserAccount userAccount = new UserAccount();
+        userAccount.setEmail(mEmailField.getText().toString());
+        userAccount.setName(mNameField.getText().toString());
+        userAccount.setPhone(mPhoneField.getText().toString());
+        userAccount.setSurname(mSurnameField.getText().toString());
+        userAccount.setProfile_image("none");
+        userAccount.setDescription("no description");
+        userAccount.setUser_id(userID);
+        userAccount.setBirth(mBirthField.getText().toString());
 
+        System.out.println(userAccount.toString());
+        System.out.println(userID);
+
+        mRef.child(getString(R.string.db_user_account)).child(userID).setValue(userAccount);
     }
 
     private boolean validateForm() {
