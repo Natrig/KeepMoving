@@ -14,7 +14,6 @@ public class UserAccount {
 
     public UserAccount(String user_id, String name, String surname, String phone,
                        String email, String description, String profile_image, String birth) {
-
         this.user_id = user_id;
         this.name = name;
         this.surname = surname;

@@ -159,44 +159,12 @@
                 </android.support.design.widget.TextInputLayout>
             </RelativeLayout>
 
-            <!-- Email section -->
-            <RelativeLayout
-                android:id="@+id/relLayout5"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@id/relLayout4"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/border_bottom_inherited">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_email" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp">
-
-                    <EditText
-                        android:id="@+id/emailInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/email_label"
-                        android:inputType="textNoSuggestions" />
-                </android.support.design.widget.TextInputLayout>
-            </RelativeLayout>
-
             <!-- Description section -->
             <RelativeLayout
                 android:id="@+id/relLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@id/relLayout5"
+                android:layout_below="@id/relLayout4"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/border_bottom_inherited">
 

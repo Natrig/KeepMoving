@@ -32,8 +32,6 @@ public class LoginActivity extends BaseActivity {
     private EditText mEmailField;
     private EditText mPasswordField;
 
-    public final static String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

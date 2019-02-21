@@ -126,9 +126,6 @@ public class SignUpActivity extends BaseActivity {
         userAccount.setUser_id(userID);
         userAccount.setBirth(mBirthField.getText().toString());
 
-        System.out.println(userAccount.toString());
-        System.out.println(userID);
-
         mRef.child(getString(R.string.db_user_account)).child(userID).setValue(userAccount);
     }
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KeepMoving</string>
     <string name="loading">Загрузка…</string>
-    
+
     <!-- Firebase DB names -->
     <string name="db_user_account">user_account</string>
 
@@ -29,4 +29,10 @@
     <string name="edit">Редактировать</string>
     <string name="editing">Редактирование</string>
     <string name="change_image">Изменить фотографию</string>
+
+    <!-- String related to Picker Activity -->
+    <string name="picker_info">Уточнения по поездке</string>
+    <string name="departure_date">Дата поездки</string>
+    <string name="from_place">Точка отправления</string>
+    <string name="where_place">Точка назначения</string>
 </resources>

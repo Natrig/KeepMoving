@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/snippet_top_picker" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@id/relLayout2"
+            android:layout_below="@id/relLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_centerInParent="true">
+
+                <!-- Date field -->
+                <RelativeLayout
+                    android:id="@+id/relFieldLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border_bottom_inherited">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_date" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp">
+
+                        <EditText
+                            android:id="@+id/departureDateInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="@string/departure_date"
+                            android:inputType="textNoSuggestions" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+                <!-- Place from field -->
+                <RelativeLayout
+                    android:id="@+id/relFieldLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/relFieldLayout1"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border_bottom_inherited">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_compass" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp">
+
+                        <EditText
+                            android:id="@+id/fromPlaceInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="@string/from_place"
+                            android:inputType="textNoSuggestions" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+
+                <!-- Place where field -->
+                <RelativeLayout
+                    android:id="@+id/relFieldLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/relFieldLayout2"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border_bottom_inherited">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_compass" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp">
+
+                        <EditText
+                            android:id="@+id/wherePlaceInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="@string/where_place"
+                            android:inputType="textNoSuggestions" />
+                    </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
