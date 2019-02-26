@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
@@ -26,8 +27,10 @@ public class KPDatePicker extends DialogFragment
         return new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, this, year, month, day);
     }
 
-    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         EditText dateInput = (EditText) getActivity().findViewById(R.id.yearInput);
+
         Calendar c = new GregorianCalendar();
         c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         c.set(Calendar.MONTH, month);

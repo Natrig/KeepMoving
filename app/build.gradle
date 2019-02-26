@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

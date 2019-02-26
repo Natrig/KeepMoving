@@ -35,4 +35,5 @@
     <string name="departure_date">Дата поездки</string>
     <string name="from_place">Точка отправления</string>
     <string name="where_place">Точка назначения</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

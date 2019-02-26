@@ -90,8 +90,7 @@
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:hint="@string/from_place"
-                            android:inputType="textNoSuggestions"
-                            android:onClick="showFromPlaceMap"/>
+                            android:inputType="textNoSuggestions" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
@@ -123,8 +122,7 @@
                             android:layout_height="match_parent"
                             android:background="@null"
                             android:hint="@string/where_place"
-                            android:inputType="textNoSuggestions"
-                            android:onClick="showWherePlaceMap" />
+                            android:inputType="textNoSuggestions" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
             </RelativeLayout>

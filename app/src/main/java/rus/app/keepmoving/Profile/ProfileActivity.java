@@ -50,8 +50,6 @@ public class ProfileActivity extends BaseActivity {
 
         Log.d(TAG, "onCreate: creating.");
 
-        showProgressDialog();
-
         mNameField = (TextView) findViewById(R.id.textName);
         mSurnameField = (TextView) findViewById(R.id.textSurname);
         mEmailField = (TextView) findViewById(R.id.email_label);
@@ -117,7 +115,6 @@ public class ProfileActivity extends BaseActivity {
         userAccount.setBirth(userSnapshot.getValue(UserAccount.class).getBirth());
 
         initProfileUI();
-        hideProgressDialog();
     }
 
     public void initProfileUI() {
