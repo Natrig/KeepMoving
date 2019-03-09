@@ -44,11 +44,11 @@ public class KPTripAdapter extends ArrayAdapter<TripListInfo> {
         TextView tvCarModel = (TextView) convertView.findViewById(R.id.carModelInput);
         TextView tvDepartureDate = (TextView) convertView.findViewById(R.id.departureInput);
 
-        tvName.setText(name);
+        tvName.setText(" " + name);
         tvFromPlace.setText(fromPlace);
-        tvWherePlace.setText(wherePlace);
-        tvCarModel.setText(carModel);
-        tvDepartureDate.setText(departureDate);
+        tvWherePlace.setText(" > " + wherePlace);
+        tvCarModel.setText(" " + carModel);
+        tvDepartureDate.setText(" " + departureDate);
 
         return convertView;
     }

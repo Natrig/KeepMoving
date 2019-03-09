@@ -6,15 +6,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
         <RelativeLayout
+            android:layout_marginTop="1dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/grey_border">
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/trip_list_border">
 
             <LinearLayout
                 android:id="@+id/linLayout1"
@@ -22,8 +21,8 @@
                 android:layout_height="100dp"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -55,7 +54,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/trip_from"
-                            android:textColor="@color/colorPrimaryText"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="15sp" />
 
                         <TextView
@@ -63,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" Сериков Рустем"
-                            android:textColor="@color/colorPrimaryText"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="15sp" />
                     </LinearLayout>
 
@@ -74,12 +73,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text="@string/trip_car" />
 
                         <TextView
                             android:id="@+id/carModelInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text=" AUDI A4" />
                     </LinearLayout>
 
@@ -91,12 +92,14 @@
                             android:id="@+id/fromPlaceInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text="Казань > " />
 
                         <TextView
                             android:id="@+id/wherePlaceInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text=" Нижнекамск" />
                     </LinearLayout>
 
@@ -107,12 +110,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text="@string/trip_departure" />
 
                         <TextView
                             android:id="@+id/departureInput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryText"
                             android:text=" 23.01.2019" />
                     </LinearLayout>
                 </LinearLayout>
