@@ -7,7 +7,7 @@ import rus.app.keepmoving.BaseActivity;
 import rus.app.keepmoving.R;
 
 public class SearchActivity extends BaseActivity {
-    private static final int ACTIVITY_NUM = 1;
+    public static final int ACTIVITY_NUM = 1;
     private static final String TAG = "SearchActivity";
 
     @Override

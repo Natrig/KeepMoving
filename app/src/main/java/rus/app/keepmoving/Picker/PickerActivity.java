@@ -13,9 +13,12 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rus.app.keepmoving.CreateTrip.CreateActivity;
 import rus.app.keepmoving.Map.MapsActivity;
 import rus.app.keepmoving.R;
+import rus.app.keepmoving.Search.SearchActivity;
 import rus.app.keepmoving.TripDetails.TripDetailsActivity;
+import rus.app.keepmoving.Trips.TripsActivity;
 import rus.app.keepmoving.Util.KPDatePicker;
 
 public class PickerActivity extends AppCompatActivity {
@@ -89,20 +92,42 @@ public class PickerActivity extends AppCompatActivity {
 
     public void showFromPlaceMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+        intent.putExtra("selector_status", "from_place");
+        startActivityForResult(intent, 33);
     }
 
     public void showWherePlaceMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+        intent.putExtra("selector_status", "where_place");
+        startActivityForResult(intent, 22);
     }
 
-    public void goTripEdit(View view) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 33:
+                    mFromField.setText(data.getStringExtra("locality"));
+                    break;
+                case 22:
+                    mWhereField.setText(data.getStringExtra("locality"));
+                    break;
+            }
+        }
+    }
+
+    public void goNext(View view) {
         if (!validateForm()) {
             return;
         }
 
-        Intent intent = new Intent(this, TripDetailsActivity.class);
+        Intent intent = null;
+        if (PREV_ACTIVITY_NUM == CreateActivity.ACTIVITY_NUM) {
+            intent = new Intent(this, TripDetailsActivity.class);
+        } else if (PREV_ACTIVITY_NUM == SearchActivity.ACTIVITY_NUM) {
+            intent = new Intent(this, TripsActivity.class);
+        }
+
         intent.putExtra("from_place", mFromField.getText().toString());
         intent.putExtra("where_place", mWhereField.getText().toString());
         intent.putExtra("departure_date", mDepartureDateField.getText().toString());

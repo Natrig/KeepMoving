@@ -4,6 +4,7 @@
 
     <!-- Firebase DB names -->
     <string name="db_user_account">user_account</string>
+    <string name="db_user_trip">user_trip</string>
 
     <!-- String related to Login activity -->
     <string name="log_in">Вход</string>
@@ -35,5 +36,21 @@
     <string name="departure_date">Дата поездки</string>
     <string name="from_place">Точка отправления</string>
     <string name="where_place">Точка назначения</string>
-    <string name="title_activity_maps">Map</string>
+
+    <!-- String related to Maps Activity -->
+    <string name="title_activity_maps">Карта</string>
+    <string name="search">Поиск</string>
+    <string name="select_city">Укажите населеный пункт</string>
+
+    <!-- String related to Trip Activities -->
+    <string name="car_number">Гос. номер автомобиля</string>
+    <string name="car_model">Модель автомобиля</string>
+    <string name="trip_description">Подробности поездки</string>
+
+    <!-- String related to Find Activities -->
+    <string name="find_trip">Поиск поездки</string>
+    <string name="trip_from">Поездка от : </string>
+    <string name="left_arrow"> > </string>
+    <string name="trip_departure">Дата поездки : </string>
+    <string name="trip_car">Автомобиль : </string>
 </resources>

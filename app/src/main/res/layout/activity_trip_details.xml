@@ -42,7 +42,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_date" />
+                        android:src="@drawable/ic_trip" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -52,13 +52,12 @@
                         android:layout_marginLeft="40dp">
 
                         <EditText
-                            android:id="@+id/yearInput"
+                            android:id="@+id/carModelInput"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@null"
-                            android:hint="@string/departure_date"
-                            android:inputType="date"
-                            android:onClick="showDatePickerDialog"/>
+                            android:hint="@string/car_model"
+                            android:inputType="textNoSuggestions"/>
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
 
@@ -75,7 +74,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_compass" />
+                        android:src="@drawable/ic_trip" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -85,11 +84,11 @@
                         android:layout_marginLeft="40dp">
 
                         <EditText
-                            android:id="@+id/fromPlaceInput"
+                            android:id="@+id/carNumberInput"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@null"
-                            android:hint="@string/from_place"
+                            android:hint="@string/car_number"
                             android:inputType="textNoSuggestions" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>
@@ -107,7 +106,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_compass" />
+                        android:src="@drawable/ic_description" />
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -117,11 +116,11 @@
                         android:layout_marginLeft="40dp">
 
                         <EditText
-                            android:id="@+id/wherePlaceInput"
+                            android:id="@+id/tripDescriptionInput"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@null"
-                            android:hint="@string/where_place"
+                            android:hint="@string/trip_description"
                             android:inputType="textNoSuggestions" />
                     </android.support.design.widget.TextInputLayout>
                 </RelativeLayout>

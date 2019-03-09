@@ -1,8 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Map.MapsActivity" />
+    android:layout_width="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Map.MapsActivity" />
+
+    <RelativeLayout
+        android:id="@+id/relLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="10dp"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/ic_magnify"
+            android:src="@drawable/ic_find_trip"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:layout_toRightOf="@id/ic_magnify"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:id="@+id/searchInput"
+            android:background="@null"
+            android:hint="@string/search"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/ic_confirm"
+            android:src="@drawable/ic_check_rounded"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:onClick="confirmLocation"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

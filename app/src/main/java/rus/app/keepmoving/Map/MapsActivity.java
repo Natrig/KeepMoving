@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
@@ -15,6 +17,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -24,18 +32,28 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import rus.app.keepmoving.Const.Constants;
 import rus.app.keepmoving.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapsActivity";
-    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final int DEFAULT_ZOOM = 13;
+    private static final int USE_CURRENT_ZOOM = -1;
 
     private boolean mLocationPermissionGranted = false;
     private LocationProvider mLocationProvider;
+    private Marker placeMarker;
+    private Address mAddress;
+
+    private EditText mSearchText;
+
 
     private GoogleMap mMap;
 
@@ -47,6 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mSearchText = (EditText) findViewById(R.id.searchInput);
     }
 
 
@@ -61,12 +81,123 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap = googleMap;
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng point) {
+                setLocation(point);
+            }
+        });
+
+        mMap.setMyLocationEnabled(true);
+
+        // Set position for ToMyLocation btn
+        View locationButton = ((View) this.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 180, 180, 0);
+
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_ACTION_DONE
+                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
+                    geoLocate();
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private void setLocation(LatLng point) {
+        if (placeMarker != null) {
+            placeMarker.setPosition(point);
+        } else {
+            placeMarker = mMap.addMarker(new MarkerOptions().position(point));
+        }
+
+        moveCamera(point, USE_CURRENT_ZOOM);
+
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> list = new ArrayList<>();
+
+        try {
+            list = geocoder.getFromLocation(point.latitude, point.longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (list.size() > 0) {
+            Address address = list.get(0);
+
+            if (address.getLocality() == null) {
+                Toast.makeText(MapsActivity.this, R.string.select_city, Toast.LENGTH_SHORT).show();
+            } else {
+                mSearchText.setText(address.getLocality());
+                mAddress = address;
+            }
+
+            Log.d(TAG, "geoLocate: " + address.toString());
+        }
+    }
+
+    public void confirmLocation(View view) {
+        if (mAddress == null) {
+            Toast.makeText(MapsActivity.this, R.string.select_city, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra("locality", mAddress.getLocality());
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    private void geoLocate() {
+        String searchString = mSearchText.getText().toString();
+
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> list = new ArrayList<>();
+
+        try {
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (list.size() > 0) {
+            Address address = list.get(0);
+
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), USE_CURRENT_ZOOM);
+            Log.d(TAG, "geoLocate: " + address.toString());
+        }
+    }
+
+    private void moveCamera(LatLng latLng, float zoom) {
+        if (zoom != USE_CURRENT_ZOOM) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        } else {
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (checkMapServices()) {
+            if (!mLocationPermissionGranted) {
+                getLocationPermission();
+            }
+        }
     }
 
     private boolean checkMapServices() {
@@ -112,7 +243,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
-//            getChatrooms();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -165,9 +295,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         switch (requestCode) {
             case Constants.PERMISSIONS_REQUEST_ENABLE_GPS: {
-                if (mLocationPermissionGranted) {
-//                    getChatrooms();
-                } else {
+                if (!mLocationPermissionGranted) {
                     getLocationPermission();
                 }
             }

@@ -93,7 +93,6 @@ public class EditProfileActivity extends BaseActivity {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("entered");
                 getUserInfo(dataSnapshot);
             }
 
