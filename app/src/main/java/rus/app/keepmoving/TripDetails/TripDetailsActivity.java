@@ -21,6 +21,7 @@ import rus.app.keepmoving.CreateTrip.CreateActivity;
 import rus.app.keepmoving.Entities.Trip;
 import rus.app.keepmoving.Picker.PickerActivity;
 import rus.app.keepmoving.R;
+import rus.app.keepmoving.TripProfile.TripProfileActivity;
 
 public class TripDetailsActivity extends AppCompatActivity {
     private static final String TAG = "PickerActivity";
@@ -110,7 +111,16 @@ public class TripDetailsActivity extends AppCompatActivity {
         mTrip.setTrip_status("created");
         mTrip.setRequests(new ArrayList<String>());
 
-        mRef.child(getString(R.string.db_user_trip)).push().setValue(mTrip);
+        DatabaseReference tripRef = mRef.child(getString(R.string.db_user_trip)).push();
+        tripRef.setValue(mTrip);
+
+        toTripProfile(tripRef.getKey());
+    }
+
+    private void toTripProfile(String tripId) {
+        Intent intent = new Intent(this, TripProfileActivity.class);
+        intent.putExtra("trip_id", tripId);
+        startActivity(intent);
     }
 
     public void stepBack(View view) {

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TripProfile.TripProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/border_bottom_inherited">
+
+        <ImageView
+            android:id="@+id/backIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/profileTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/trip"
+            android:textAlignment="center"
+            android:textColor="#546e7a"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="48dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/profileInfoLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/section_trip_profile">
+
+                <LinearLayout
+                    android:id="@+id/linLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="80"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Основная информация"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="10dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/trip_from"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/nameInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" Сериков Рустем"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/fromPlaceInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text="Казань > "
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/wherePlaceInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text=" Нижнекамск"
+                                android:textSize="15sp"  />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text="@string/trip_departure"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/departureInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text=" 23.01.2019"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="25">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerVertical="true"
+                            app:civ_border_color="@color/colorWhite"
+                            app:civ_border_width="2dp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tripInfoLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_marginBottom="10dp"
+                        android:text="Дополнительная информация"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="50"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="@string/car_model"
+                                    android:background="@drawable/border_bottom_inherited"/>
+
+                                <TextView
+                                    android:id="@+id/carModelInput"
+                                    android:paddingTop="2dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="AUDI A4 Super Quatro Dynamic Undeground" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="50">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="@string/car_number"
+                                    android:background="@drawable/border_bottom_inherited" />
+
+                                <TextView
+                                    android:id="@+id/carNumberInput"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="2dp"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="A308HTO-116" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:paddingTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="50">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="@string/trip_description"
+                                    android:background="@drawable/border_bottom_inherited" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="2dp"
+                                    android:textColor="@color/colorPrimaryText"
+                                    android:textStyle="bold"
+                                    android:text="Быстрая поездка до и после которой вам захочеся путешествовать еще и еще , невозможно оторваться" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/requestsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp">
+
+                <LinearLayout
+                    android:id="@+id/linLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:text="Заявки"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

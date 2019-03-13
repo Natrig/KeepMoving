@@ -24,6 +24,7 @@ import rus.app.keepmoving.Entities.Trip;
 import rus.app.keepmoving.Entities.TripListInfo;
 import rus.app.keepmoving.Entities.UserAccount;
 import rus.app.keepmoving.R;
+import rus.app.keepmoving.TripProfile.TripProfileActivity;
 import rus.app.keepmoving.Util.KPTripAdapter;
 
 public class TripsActivity extends AppCompatActivity {
@@ -143,8 +144,16 @@ public class TripsActivity extends AppCompatActivity {
         tripList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TripListInfo tripListInfo = mTripListInfo.get(position);
+
+                toTripProfile(tripListInfo.getTrip_id());
                 System.out.println("_---------------- " + tripListInfo.getTrip_id() + " ------------------ ");
             }
         });
+    }
+
+    private void toTripProfile(String tripId) {
+        Intent intent = new Intent(this, TripProfileActivity.class);
+        intent.putExtra("trip_id", tripId);
+        startActivity(intent);
     }
 }

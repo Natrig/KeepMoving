@@ -132,7 +132,6 @@ public class PickerActivity extends AppCompatActivity {
         intent.putExtra("where_place", mWhereField.getText().toString());
         intent.putExtra("departure_date", mDepartureDateField.getText().toString());
         startActivity(intent);
-        finish();
     }
 
     private boolean validateForm() {

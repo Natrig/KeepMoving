@@ -46,6 +46,7 @@
     <string name="car_number">Гос. номер автомобиля</string>
     <string name="car_model">Модель автомобиля</string>
     <string name="trip_description">Подробности поездки</string>
+    <string name="trip">Поездка</string>
 
     <!-- String related to Find Activities -->
     <string name="find_trip">Поиск поездки</string>
@@ -53,4 +54,5 @@
     <string name="left_arrow"> > </string>
     <string name="trip_departure">Дата поездки : </string>
     <string name="trip_car">Автомобиль : </string>
+    <string name="trip_car_number_short">Номер : </string>
 </resources>
