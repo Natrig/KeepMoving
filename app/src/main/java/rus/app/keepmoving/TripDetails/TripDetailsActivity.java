@@ -15,11 +15,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import rus.app.keepmoving.CreateTrip.CreateActivity;
 import rus.app.keepmoving.Entities.Trip;
-import rus.app.keepmoving.Picker.PickerActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.TripProfile.TripProfileActivity;
 
@@ -63,7 +62,6 @@ public class TripDetailsActivity extends AppCompatActivity {
         fields.add(mCarNumberField);
 
         mDescriptionField = findViewById(R.id.tripDescriptionInput);
-        fields.add(mDescriptionField);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
@@ -99,17 +97,18 @@ public class TripDetailsActivity extends AppCompatActivity {
         }
     }
 
+
     public void goNext(View view) {
         if (!validateForm()) {
             return;
         }
 
+        mTrip.setTrip_status("created");
+        mTrip.setRequests(new HashMap<String, String>());
+        mTrip.setCreator_id(currentUser.getUid());
         mTrip.setCar_model(mCarModelField.getText().toString());
         mTrip.setCar_number(mCarNumberField.getText().toString());
         mTrip.setDescription(mDescriptionField.getText().toString());
-        mTrip.setCreator_id(currentUser.getUid());
-        mTrip.setTrip_status("created");
-        mTrip.setRequests(new ArrayList<String>());
 
         DatabaseReference tripRef = mRef.child(getString(R.string.db_user_trip)).push();
         tripRef.setValue(mTrip);
@@ -121,16 +120,11 @@ public class TripDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TripProfileActivity.class);
         intent.putExtra("trip_id", tripId);
         startActivity(intent);
+        finish();
     }
 
     public void stepBack(View view) {
         Log.d(TAG, "onClick: navigation back");
-        Intent intent = new Intent(this, PickerActivity.class);
-        intent.putExtra("from_place", fromPlace);
-        intent.putExtra("where_place", wherePlace);
-        intent.putExtra("departure_date", departureDate);
-        intent.putExtra("ACTIVITY_NUM", CreateActivity.ACTIVITY_NUM);
-        startActivity(intent);
         finish();
     }
 

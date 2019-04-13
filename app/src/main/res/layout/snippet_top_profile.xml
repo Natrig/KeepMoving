@@ -4,6 +4,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/section_trip_profile"
         android:layout_marginTop="10dp">
 
 
@@ -14,8 +15,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Сериков"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,11 +26,13 @@
             android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:textStyle="bold"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:text="Рустем"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textSurname" />
@@ -36,7 +40,7 @@
         <TextView
             android:id="@+id/textEdit"
             android:layout_width="0dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -48,7 +52,7 @@
             android:onClick="goEdit"
             android:text="@string/edit"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

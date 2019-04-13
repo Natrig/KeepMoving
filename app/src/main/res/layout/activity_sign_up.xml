@@ -154,6 +154,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/kp_button"
             android:onClick="signUp"
+            android:textColor="@color/colorWhite"
             android:text="@string/create_account"
             android:textAllCaps="false" />
     </RelativeLayout>

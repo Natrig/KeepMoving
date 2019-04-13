@@ -52,7 +52,18 @@
     <string name="find_trip">Поиск поездки</string>
     <string name="trip_from">Поездка от : </string>
     <string name="left_arrow"> > </string>
+
+    <string name="trip_send_request">Отправить заявку</string>
+    <string name="trip_look_car">Посмотреть местоположение машины</string>
     <string name="trip_departure">Дата поездки : </string>
+    <string name="trip_status">Статус поездки : </string>
     <string name="trip_car">Автомобиль : </string>
     <string name="trip_car_number_short">Номер : </string>
+    <string name="trip_additional_info">Дополнительная информация</string>
+    <string name="trip_cancel">Отменить поездку</string>
+    <string name="trip_start">Начать поездку</string>
+
+
+    <!-- String related to Requests -->
+    <string name="request_from">Заявка от : </string>
 </resources>

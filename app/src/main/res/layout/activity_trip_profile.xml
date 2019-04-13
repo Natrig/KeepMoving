@@ -93,7 +93,7 @@
                                 android:id="@+id/nameInput"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" Сериков Рустем"
+                                android:text=""
                                 android:textColor="@color/colorWhite"
                                 android:textStyle="bold"
                                 android:textSize="15sp" />
@@ -141,7 +141,29 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorWhite"
                                 android:textStyle="bold"
-                                android:text=" 23.01.2019"
+                                android:text=""
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text="@string/trip_status"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/statusInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:text=""
                                 android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -186,7 +208,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/colorPrimaryText"
                         android:layout_marginBottom="10dp"
-                        android:text="Дополнительная информация"/>
+                        android:text="@string/trip_additional_info"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -217,7 +239,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimaryText"
                                     android:textStyle="bold"
-                                    android:text="AUDI A4 Super Quatro Dynamic Undeground" />
+                                    android:text="" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -241,7 +263,7 @@
                                     android:paddingTop="2dp"
                                     android:textColor="@color/colorPrimaryText"
                                     android:textStyle="bold"
-                                    android:text="A308HTO-116" />
+                                    android:text="" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -266,31 +288,30 @@
                                     android:background="@drawable/border_bottom_inherited" />
 
                                 <TextView
+                                    android:id="@+id/descriptionInput"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingTop="2dp"
                                     android:textColor="@color/colorPrimaryText"
                                     android:textStyle="bold"
-                                    android:text="Быстрая поездка до и после которой вам захочеся путешествовать еще и еще , невозможно оторваться" />
+                                    android:text="Не указаны" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-
                 </LinearLayout>
-
-
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/requestsLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp">
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/linLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="20dp"
@@ -298,12 +319,38 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
                         android:text="Заявки"/>
 
+                    <ListView
+                        android:id="@+id/requestsListView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:divider="@null"
+                        android:dividerHeight="0dp"></ListView>
                 </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/buttonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <Button
+                    android:id="@+id/requestButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/trip_send_request"
+                    android:background="@drawable/kp_button_plain"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

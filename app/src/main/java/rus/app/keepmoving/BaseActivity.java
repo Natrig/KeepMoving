@@ -69,7 +69,6 @@ public class BaseActivity extends AppCompatActivity {
 
         Menu menu = bottomNavigationViewEx.getMenu();
 
-        System.out.println("--------SADASDA  AS: " + ActivityNum + "-------------");
         MenuItem menuItem = menu.getItem(ActivityNum);
         menuItem.setChecked(true);
 

@@ -1,6 +1,6 @@
 package rus.app.keepmoving.Entities;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class Trip {
     private String departure_date;
@@ -13,7 +13,7 @@ public class Trip {
 
     private String creator_id;
     private String trip_status;
-    private List<String> requests;
+    private HashMap<String, String> requests;
 
     public Trip() {
 
@@ -96,11 +96,11 @@ public class Trip {
         this.trip_status = trip_status;
     }
 
-    public List<String> getRequests() {
+    public HashMap<String, String> getRequests() {
         return requests;
     }
 
-    public void setRequests(List<String> requests) {
+    public void setRequests(HashMap<String, String> requests) {
         this.requests = requests;
     }
 }

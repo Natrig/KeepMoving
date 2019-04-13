@@ -146,7 +146,6 @@ public class TripsActivity extends AppCompatActivity {
                 TripListInfo tripListInfo = mTripListInfo.get(position);
 
                 toTripProfile(tripListInfo.getTrip_id());
-                System.out.println("_---------------- " + tripListInfo.getTrip_id() + " ------------------ ");
             }
         });
     }

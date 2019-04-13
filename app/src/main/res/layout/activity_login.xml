@@ -66,6 +66,7 @@
             android:background="@drawable/kp_button"
             android:onClick="login"
             android:text="@string/log_in"
+            android:textColor="@color/colorWhite"
             android:textAllCaps="false" />
 
         <RelativeLayout
