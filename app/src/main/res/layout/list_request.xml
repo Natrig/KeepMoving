@@ -84,6 +84,7 @@
                             android:layout_marginRight="10dp"
                             android:textSize="14sp"
                             android:width="120dp"
+                            android:focusable="false"
                             android:text="Принять"
                             android:textColor="@color/colorWhite"
                             android:background="@drawable/kp_button_plain"/>
@@ -95,6 +96,7 @@
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
                             android:layout_height="30sp"
+                            android:focusable="false"
                             android:text="Отклонить"
                             android:textColor="@color/colorWhite"
                             android:background="@drawable/kp_error_button_plain"/>

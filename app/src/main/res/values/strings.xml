@@ -66,4 +66,12 @@
 
     <!-- String related to Requests -->
     <string name="request_from">Заявка от : </string>
+
+
+    <!-- String related to Photo Activity -->
+    <string name="gallery">Галерея</string>
+    <string name="photo">Фото</string>
+    <string name="camera">Камера</string>
+    <string name="open_camera">Открыть камеру</string>
+    <string name="next">Далее</string>
 </resources>

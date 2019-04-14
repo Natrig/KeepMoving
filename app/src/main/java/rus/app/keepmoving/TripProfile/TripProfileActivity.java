@@ -309,6 +309,8 @@ public class TripProfileActivity extends AppCompatActivity {
         requestListView.setAdapter(adapter);
         requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("ENTERED");
+
                 RequestListInfo requestInfo = requestsList.get(position);
 
                 toUserProfile(requestInfo.getUser_id());

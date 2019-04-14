@@ -28,7 +28,8 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/change_image"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:onClick="toPhotoActivity"/>
 
 
             <!-- Name section -->

@@ -21,6 +21,7 @@ import java.util.List;
 
 import rus.app.keepmoving.BaseActivity;
 import rus.app.keepmoving.Entities.UserAccount;
+import rus.app.keepmoving.Photo.PhotoActivity;
 import rus.app.keepmoving.Profile.ProfileActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.KPImageLoader;
@@ -158,6 +159,12 @@ public class EditProfileActivity extends BaseActivity {
         intent.putExtra("userID", userAccount.getUser_id());
         startActivity(intent);
         finish();
+    }
+
+    public void toPhotoActivity(View view) {
+        Intent intent = new Intent(this, PhotoActivity.class);
+
+        startActivity(intent);
     }
 
     private boolean validateForm() {

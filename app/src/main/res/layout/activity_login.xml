@@ -92,7 +92,7 @@
                 android:layout_toRightOf="@+id/textView"
                 android:onClick="goSignIn"
                 android:text="@string/create_account"
-                android:textColor="#80D8FF" />
+                android:textColor="@color/colorPrimary" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
