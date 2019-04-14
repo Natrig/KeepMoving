@@ -31,6 +31,7 @@
                     android:layout_toRightOf="@+id/ivCloseShare"
                     android:id="@+id/spinnerDirectory"
                     android:textSize="20sp"
+                    android:layout_marginRight="60dp"
                     android:textColor="@color/colorBlack"
                     android:text="@string/gallery"
                     android:layout_centerVertical="true"

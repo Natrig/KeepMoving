@@ -1,5 +1,6 @@
 package rus.app.keepmoving.Photo;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,14 +15,22 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import java.util.ArrayList;
 
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.FilePaths;
 import rus.app.keepmoving.Util.FileSearch;
+import rus.app.keepmoving.Util.GridImageAdapter;
 
 public class GalleryFragment extends Fragment {
     private static final String TAG = "GalleryFragment";
+
+    // const
+    private static final int NUM_GRID_COLUMNS = 3;
 
     // widgets
     private GridView gridView;
@@ -31,6 +40,7 @@ public class GalleryFragment extends Fragment {
 
     // variables
     private ArrayList<String> directories;
+    private String mAppend = "file:/";
 
     @Nullable
     @Override
@@ -83,13 +93,59 @@ public class GalleryFragment extends Fragment {
 
         directorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setupGridView(directories.get(position));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+    }
+
+    private void setupGridView(String selectedDirectory) {
+        final ArrayList<String> imgURLs = FileSearch.getFilePath(selectedDirectory);
+
+        int gridWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageWidth = gridWidth / NUM_GRID_COLUMNS;
+        gridView.setColumnWidth(imageWidth);
+
+        GridImageAdapter gridImageAdapter = new GridImageAdapter(getActivity(), R.layout.layout_grid_imageview, mAppend, imgURLs);
+        gridView.setAdapter(gridImageAdapter);
+
+
+        setImage(imgURLs.get(0), galleryImage, mAppend);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                setImage(imgURLs.get(position), galleryImage, mAppend);
+            }
+        });
+    }
+
+    private void setImage(String imgURLs, ImageView image, String append) {
+        ImageLoader imageLoader = ImageLoader.getInstance();
+
+        imageLoader.displayImage(append + imgURLs, image, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+                mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
