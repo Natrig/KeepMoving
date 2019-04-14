@@ -37,6 +37,10 @@ public class FileSearch {
 
         File[] listFiles = file.listFiles();
 
+        if (listFiles == null) {
+            return pathArray;
+        }
+
         for (File fileInList :listFiles) {
             if (fileInList.isFile()) {
                 pathArray.add(fileInList.getAbsolutePath());

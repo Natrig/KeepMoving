@@ -25,12 +25,14 @@ import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.FilePaths;
 import rus.app.keepmoving.Util.FileSearch;
 import rus.app.keepmoving.Util.GridImageAdapter;
+import rus.app.keepmoving.Util.KPFirebase;
 
 public class GalleryFragment extends Fragment {
     private static final String TAG = "GalleryFragment";
 
     // const
     private static final int NUM_GRID_COLUMNS = 3;
+    private KPFirebase mKPFirebase;
 
     // widgets
     private GridView gridView;
@@ -41,11 +43,14 @@ public class GalleryFragment extends Fragment {
     // variables
     private ArrayList<String> directories;
     private String mAppend = "file:/";
+    private String mSelectedImg = "";
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
+
+        mKPFirebase = new KPFirebase(getActivity());
 
         galleryImage = (ImageView) view.findViewById(R.id.galleryImageView);
         gridView = (GridView) view.findViewById(R.id.gridView);
@@ -67,7 +72,10 @@ public class GalleryFragment extends Fragment {
         nextScreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (!mSelectedImg.equals("")) {
+                    mKPFirebase.uploadProfilePhoto(mSelectedImg, null);
+                    getActivity().finish();
+                }
             }
         });
 
@@ -85,8 +93,16 @@ public class GalleryFragment extends Fragment {
 
         directories.add(filePaths.CAMERA);
 
+        ArrayList<String> directoryNames = new ArrayList<>();
+        for (String directory : directories) {
+            int index = directory.lastIndexOf("/");
+            String subStr = directory.substring(index + 1);
+
+            directoryNames.add(subStr);
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, directories);
+                android.R.layout.simple_spinner_item, directoryNames);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         directorySpinner.setAdapter(adapter);
@@ -114,12 +130,16 @@ public class GalleryFragment extends Fragment {
         GridImageAdapter gridImageAdapter = new GridImageAdapter(getActivity(), R.layout.layout_grid_imageview, mAppend, imgURLs);
         gridView.setAdapter(gridImageAdapter);
 
+        if (imgURLs.size() != 0) {
+            setImage(imgURLs.get(0), galleryImage, mAppend);
+            mSelectedImg = imgURLs.get(0);
+        }
 
-        setImage(imgURLs.get(0), galleryImage, mAppend);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 setImage(imgURLs.get(position), galleryImage, mAppend);
+                mSelectedImg = imgURLs.get(position);
             }
         });
     }
