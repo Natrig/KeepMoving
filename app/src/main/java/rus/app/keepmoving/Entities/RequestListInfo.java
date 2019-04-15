@@ -4,6 +4,7 @@ public class RequestListInfo {
     private String trip_id;
     private String user_id;
     private String user_name;
+    private String imgUrl;
 
     public RequestListInfo() {
     }
@@ -36,5 +37,13 @@ public class RequestListInfo {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

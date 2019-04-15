@@ -31,18 +31,17 @@ public class EditProfileActivity extends BaseActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
 
     private UserAccount userAccount;
 
     List<EditText> fields;
     private EditText mNameField;
-    private EditText mSurnameField;
     private EditText mBirthField;
     private EditText mPhoneField;
-    private EditText mDescriptionField;
     private ImageView mImageField;
+    private EditText mSurnameField;
+    private EditText mDescriptionField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +77,8 @@ public class EditProfileActivity extends BaseActivity {
             }
         });
 
-        setProfileImage();
-
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference();
+        mRef = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -106,35 +102,28 @@ public class EditProfileActivity extends BaseActivity {
 
     public void getUserInfo(DataSnapshot dataSnapshot) {
         userAccount = new UserAccount();
-        DataSnapshot userSnapshot = dataSnapshot
-                .child(getString(R.string.db_user_account)).child(currentUser.getUid());
+        UserAccount userSnapshot = dataSnapshot
+                .child(getString(R.string.db_user_account)).child(currentUser.getUid()).getValue(UserAccount.class);
 
-        userAccount.setEmail(userSnapshot.getValue(UserAccount.class).getEmail());
-        userAccount.setName(userSnapshot.getValue(UserAccount.class).getName());
-        userAccount.setPhone(userSnapshot.getValue(UserAccount.class).getPhone());
-        userAccount.setSurname(userSnapshot.getValue(UserAccount.class).getSurname());
-        userAccount.setProfile_image(userSnapshot.getValue(UserAccount.class).getProfile_image());
-        userAccount.setDescription(userSnapshot.getValue(UserAccount.class).getDescription());
-        userAccount.setUser_id(userSnapshot.getValue(UserAccount.class).getUser_id());
-        userAccount.setBirth(userSnapshot.getValue(UserAccount.class).getBirth());
+        userAccount.setName(userSnapshot.getName());
+        userAccount.setPhone(userSnapshot.getPhone());
+        userAccount.setEmail(userSnapshot.getEmail());
+        userAccount.setBirth(userSnapshot.getBirth());
+        userAccount.setSurname(userSnapshot.getSurname());
+        userAccount.setUser_id(userSnapshot.getUser_id());
+        userAccount.setDescription(userSnapshot.getDescription());
+        userAccount.setProfile_image(userSnapshot.getProfile_image());
 
         initProfileUI();
     }
 
     public void initProfileUI() {
         mNameField.setText(userAccount.getName());
-        mSurnameField.setText(userAccount.getSurname());
-        mDescriptionField.setText(userAccount.getDescription());
         mPhoneField.setText(userAccount.getPhone());
         mBirthField.setText(userAccount.getBirth());
-    }
-
-    // TODO :: SET CORRECT IMG
-    private void setProfileImage() {
-        Log.d(TAG, "set Profile image: setting profile image");
-        String imgUrl = "https://ih1.redbubble.net/image.159500319.3826/flat,750x1000,075,t.u5.jpg";
-
-        KPImageLoader.setImage(imgUrl, mImageField, null, "");
+        mSurnameField.setText(userAccount.getSurname());
+        mDescriptionField.setText(userAccount.getDescription());
+        KPImageLoader.setImage(userAccount.getProfile_image(), mImageField, null, "");
     }
 
     public void doEdit(View view) {
@@ -146,10 +135,9 @@ public class EditProfileActivity extends BaseActivity {
 
         userAccount.setName(mNameField.getText().toString());
         userAccount.setPhone(mPhoneField.getText().toString());
-        userAccount.setSurname(mSurnameField.getText().toString());
-        userAccount.setProfile_image("https://ih1.redbubble.net/image.159500319.3826/flat,750x1000,075,t.u5.jpg");
-        userAccount.setDescription(mDescriptionField.getText().toString());
         userAccount.setBirth(mBirthField.getText().toString());
+        userAccount.setSurname(mSurnameField.getText().toString());
+        userAccount.setDescription(mDescriptionField.getText().toString());
 
         mRef.child(getString(R.string.db_user_account)).child(userAccount.getUser_id()).setValue(userAccount);
 

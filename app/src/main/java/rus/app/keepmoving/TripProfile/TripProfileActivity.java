@@ -95,13 +95,6 @@ public class TripProfileActivity extends AppCompatActivity {
         }
     }
 
-    // TODO :: SET CORRECT IMG
-    private void setProfileImage() {
-        String imgUrl = "https://pp.userapi.com/c836223/v836223879/50278/IJj5HjbXWaA.jpg?ava=1";
-
-        KPImageLoader.setImage(imgUrl, (ImageView) findViewById(R.id.profile_image), null, "");
-    }
-
     private void getTripProfile(DataSnapshot dataSnapshot, String tripId) {
         requestedTrip = dataSnapshot
                 .child(getString(R.string.db_user_trip))
@@ -139,7 +132,8 @@ public class TripProfileActivity extends AppCompatActivity {
         tvWherePlace.setText(" > " + requestedTrip.getWhere_place());
         tvDepartureDate.setText(" " + requestedTrip.getDeparture_date());
 
-        setProfileImage();
+        KPImageLoader.setImage(tripCreator.getProfile_image(),
+                (ImageView) findViewById(R.id.profile_image), null, "");
     }
 
     private void toggleUserView(DataSnapshot dataSnapshot) {
@@ -291,14 +285,11 @@ public class TripProfileActivity extends AppCompatActivity {
                 requestInfo.setTrip_id(tripId);
                 requestInfo.setUser_id(userId);
 
-                DataSnapshot userSnapshot = dataSnapshot
-                        .child(getString(R.string.db_user_account)).child(requestInfo.getUser_id());
+                UserAccount account = dataSnapshot
+                        .child(getString(R.string.db_user_account)).child(requestInfo.getUser_id()).getValue(UserAccount.class);
 
-                requestInfo.setUser_name(
-                        userSnapshot.getValue(UserAccount.class).getSurname() +
-                                " " +
-                                userSnapshot.getValue(UserAccount.class).getName()
-                );
+                requestInfo.setImgUrl(account.getProfile_image());
+                requestInfo.setUser_name(account.getSurname() + " " + account.getName());
 
                 requestsList.add(requestInfo);
             }
@@ -309,8 +300,6 @@ public class TripProfileActivity extends AppCompatActivity {
         requestListView.setAdapter(adapter);
         requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("ENTERED");
-
                 RequestListInfo requestInfo = requestsList.get(position);
 
                 toUserProfile(requestInfo.getUser_id());

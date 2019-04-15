@@ -45,7 +45,7 @@ public class PhotoActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setText(getString(R.string.camera));
     }
 
-    public void verifyPermissions(String [] permissions) {
+    public void verifyPermissions(String[] permissions) {
         ActivityCompat.requestPermissions(
                 PhotoActivity.this,
                 permissions,
@@ -53,7 +53,7 @@ public class PhotoActivity extends AppCompatActivity {
         );
     }
 
-    public boolean checkPermissionsArray(String [] permissions) {
+    public boolean checkPermissionsArray(String[] permissions) {
         for (String permission : permissions) {
             if (!checkSinglePermission(permission)) {
                 return false;

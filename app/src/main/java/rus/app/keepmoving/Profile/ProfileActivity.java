@@ -51,15 +51,14 @@ public class ProfileActivity extends BaseActivity {
         Log.d(TAG, "onCreate: creating.");
 
         mNameField = (TextView) findViewById(R.id.textName);
-        mSurnameField = (TextView) findViewById(R.id.textSurname);
         mEmailField = (TextView) findViewById(R.id.email_label);
         mBirthField = (TextView) findViewById(R.id.birth_label);
         mPhoneField = (TextView) findViewById(R.id.phone_label);
-        mDescriptionField = (TextView) findViewById(R.id.description_label);
+        mSurnameField = (TextView) findViewById(R.id.textSurname);
         mImageField = (ImageView) findViewById(R.id.profile_image);
+        mDescriptionField = (TextView) findViewById(R.id.description_label);
 
         setupBottomNavBar(ProfileActivity.this, ACTIVITY_NUM);
-        setProfileImage();
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
@@ -102,36 +101,29 @@ public class ProfileActivity extends BaseActivity {
             exitBtnLayout.setVisibility(View.INVISIBLE);
         }
 
-        DataSnapshot userSnapshot = dataSnapshot
-                .child(getString(R.string.db_user_account)).child(userID);
+        UserAccount userSnapshot = dataSnapshot
+                .child(getString(R.string.db_user_account)).child(userID).getValue(UserAccount.class);
 
-        userAccount.setEmail(userSnapshot.getValue(UserAccount.class).getEmail());
-        userAccount.setName(userSnapshot.getValue(UserAccount.class).getName());
-        userAccount.setPhone(userSnapshot.getValue(UserAccount.class).getPhone());
-        userAccount.setSurname(userSnapshot.getValue(UserAccount.class).getSurname());
-        userAccount.setProfile_image(userSnapshot.getValue(UserAccount.class).getProfile_image());
-        userAccount.setDescription(userSnapshot.getValue(UserAccount.class).getDescription());
-        userAccount.setUser_id(userSnapshot.getValue(UserAccount.class).getUser_id());
-        userAccount.setBirth(userSnapshot.getValue(UserAccount.class).getBirth());
+        userAccount.setName(userSnapshot.getName());
+        userAccount.setEmail(userSnapshot.getEmail());
+        userAccount.setPhone(userSnapshot.getPhone());
+        userAccount.setBirth(userSnapshot.getBirth());
+        userAccount.setSurname(userSnapshot.getSurname());
+        userAccount.setUser_id(userSnapshot.getUser_id());
+        userAccount.setDescription(userSnapshot.getDescription());
+        userAccount.setProfile_image(userSnapshot.getProfile_image());
 
         initProfileUI();
     }
 
     public void initProfileUI() {
         mNameField.setText(userAccount.getName());
-        mSurnameField.setText(userAccount.getSurname());
-        mDescriptionField.setText(userAccount.getDescription());
         mPhoneField.setText(userAccount.getPhone());
         mEmailField.setText(userAccount.getEmail());
         mBirthField.setText(userAccount.getBirth());
-    }
-
-    // TODO :: SET CORRECT IMG
-    private void setProfileImage() {
-        Log.d(TAG, "setProfileImage: setting...");
-        String imgUrl = "https://ih1.redbubble.net/image.159500319.3826/flat,750x1000,075,t.u5.jpg";
-
-        KPImageLoader.setImage(imgUrl, mImageField, null, "");
+        mSurnameField.setText(userAccount.getSurname());
+        mDescriptionField.setText(userAccount.getDescription());
+        KPImageLoader.setImage(userAccount.getProfile_image(), mImageField, null, "");
     }
 
     public void goEdit(View view) {

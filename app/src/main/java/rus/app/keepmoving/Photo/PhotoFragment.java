@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.KPFirebase;
@@ -28,11 +28,11 @@ public class PhotoFragment extends Fragment {
 
         mKPFirebase = new KPFirebase(getActivity());
 
-        Button btnLaunchCamera = (Button) view.findViewById(R.id.btnLaunchCamera);
+        ImageView btnLaunchCamera = (ImageView) view.findViewById(R.id.btnLaunchCamera);
         btnLaunchCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (((PhotoActivity)getActivity()).checkSinglePermission(KPPhotoPermissions.CAMERA_PERMISSIONS[0])) {
+                if (((PhotoActivity) getActivity()).checkSinglePermission(KPPhotoPermissions.CAMERA_PERMISSIONS[0])) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
                 } else {
@@ -50,11 +50,13 @@ public class PhotoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Bitmap bm = (Bitmap) data.getExtras().get("data");
-        if (requestCode == CAMERA_REQUEST_CODE) {
+        if (data != null) {
+            Bitmap bm = (Bitmap) data.getExtras().get("data");
+            if (requestCode == CAMERA_REQUEST_CODE) {
 
-            mKPFirebase.uploadProfilePhoto("", bm);
-            getActivity().finish();
+                mKPFirebase.uploadProfilePhoto("", bm);
+                getActivity().finish();
+            }
         }
     }
 }

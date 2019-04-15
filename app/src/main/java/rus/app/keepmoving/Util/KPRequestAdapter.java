@@ -34,11 +34,11 @@ public class KPRequestAdapter extends ArrayAdapter<RequestListInfo> {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
         convertView = LayoutInflater.from(mContext).inflate(mResource, parent, false);
-//        final View currentItemView = getView(position,convertView,parent);
 
         String name = getItem(position).getUser_name();
         final String trip_id = getItem(position).getTrip_id();
         final String user_id = getItem(position).getUser_id();
+        final String user_photo = getItem(position).getImgUrl();
 
         final TextView tvName = (TextView) convertView.findViewById(R.id.requestNameInput);
         final Button tvAcceptButton = (Button) convertView.findViewById(R.id.requestAcceptButton);
@@ -68,12 +68,7 @@ public class KPRequestAdapter extends ArrayAdapter<RequestListInfo> {
         });
 
         tvName.setText(" " + name);
-
-
-        /* TODO */
-        String imgUrl = "https://pp.userapi.com/c836223/v836223879/50278/IJj5HjbXWaA.jpg?ava=1";
-        KPImageLoader.setImage(imgUrl, (ImageView) convertView.findViewById(R.id.requestProfileImage), null, "");
-        /* */
+        KPImageLoader.setImage(user_photo, (ImageView) convertView.findViewById(R.id.requestProfileImage), null, "");
 
         return convertView;
     }

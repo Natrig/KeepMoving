@@ -74,4 +74,8 @@
     <string name="camera">Камера</string>
     <string name="open_camera">Открыть камеру</string>
     <string name="next">Далее</string>
+
+
+    <!-- String related to Main Activity -->
+    <string name="no_trip">У Вас пока нет поездок</string>
 </resources>

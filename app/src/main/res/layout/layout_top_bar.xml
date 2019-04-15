@@ -13,7 +13,18 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border_top" />
+                android:background="@drawable/border_top" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keep Moving"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    />
+
+
+            </android.support.design.widget.TabLayout>
 
         </android.support.design.widget.AppBarLayout>
 
