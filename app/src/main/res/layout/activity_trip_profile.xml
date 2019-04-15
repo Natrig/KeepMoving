@@ -169,6 +169,7 @@
                     </LinearLayout>
 
                     <RelativeLayout
+                        android:id="@+id/userPhoto"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="25dp"
@@ -177,6 +178,103 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/profile_image"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerVertical="true"
+                            app:civ_border_color="@color/colorWhite"
+                            app:civ_border_width="2dp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/driverInfoLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:background="@drawable/section_trip_driver">
+
+                <LinearLayout
+                    android:id="@+id/linLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="80"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Информация о водителе"
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="10dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/name_label"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/driverNameInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/surname_label"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/driverSurnameInput"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/driverPhoto"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_weight="25">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/driver_image"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_centerVertical="true"

@@ -62,6 +62,8 @@
     <string name="trip_additional_info">Дополнительная информация</string>
     <string name="trip_cancel">Отменить поездку</string>
     <string name="trip_start">Начать поездку</string>
+    <string name="trip_finish">Завершить поездку</string>
+
 
 
     <!-- String related to Requests -->

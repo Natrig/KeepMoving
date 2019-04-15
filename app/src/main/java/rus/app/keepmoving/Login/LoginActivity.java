@@ -77,7 +77,7 @@ public class LoginActivity extends BaseActivity {
                             onStart();
                         } else {
                             Toast.makeText(LoginActivity.this,
-                                    R.string.failed + " : " +task.getException(),
+                                    R.string.failed + " : " + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         }
 

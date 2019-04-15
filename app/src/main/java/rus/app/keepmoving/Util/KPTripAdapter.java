@@ -30,24 +30,24 @@ public class KPTripAdapter extends ArrayAdapter<TripListInfo> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getCreator_name();
+        String carModel = getItem(position).getCar_model();
         String fromPlace = getItem(position).getFrom_place();
         String wherePlace = getItem(position).getWhere_place();
-        String carModel = getItem(position).getCar_model();
         String departureDate = getItem(position).getDeparture_date();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
         TextView tvName = (TextView) convertView.findViewById(R.id.nameInput);
+        TextView tvCarModel = (TextView) convertView.findViewById(R.id.carModelInput);
         TextView tvFromPlace = (TextView) convertView.findViewById(R.id.fromPlaceInput);
         TextView tvWherePlace = (TextView) convertView.findViewById(R.id.wherePlaceInput);
-        TextView tvCarModel = (TextView) convertView.findViewById(R.id.carModelInput);
         TextView tvDepartureDate = (TextView) convertView.findViewById(R.id.departureInput);
 
         tvName.setText(" " + name);
         tvFromPlace.setText(fromPlace);
-        tvWherePlace.setText(" > " + wherePlace);
         tvCarModel.setText(" " + carModel);
+        tvWherePlace.setText(" > " + wherePlace);
         tvDepartureDate.setText(" " + departureDate);
 
         return convertView;

@@ -104,8 +104,4 @@ public class UserAccount {
                 ", birth=" + birth +
                 '}';
     }
-
-    public String getFullName() {
-        return this.surname + " " + this.name;
-    }
 }

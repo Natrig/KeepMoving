@@ -27,7 +27,6 @@ public class TripDetailsActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
 
     List<EditText> fields;
@@ -64,10 +63,8 @@ public class TripDetailsActivity extends AppCompatActivity {
         mDescriptionField = findViewById(R.id.tripDescriptionInput);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference();
+        mRef = FirebaseDatabase.getInstance().getReference();
     }
-
 
     @Override
     public void onStart() {
@@ -97,15 +94,14 @@ public class TripDetailsActivity extends AppCompatActivity {
         }
     }
 
-
     public void goNext(View view) {
         if (!validateForm()) {
             return;
         }
 
-        mTrip.setTrip_status("created");
-        mTrip.setRequests(new HashMap<String, String>());
+        mTrip.setTrip_status("CREATED");
         mTrip.setCreator_id(currentUser.getUid());
+        mTrip.setRequests(new HashMap<String, String>());
         mTrip.setCar_model(mCarModelField.getText().toString());
         mTrip.setCar_number(mCarNumberField.getText().toString());
         mTrip.setDescription(mDescriptionField.getText().toString());

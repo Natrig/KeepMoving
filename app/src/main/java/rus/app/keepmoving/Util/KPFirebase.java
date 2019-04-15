@@ -45,7 +45,7 @@ public class KPFirebase {
         }
     }
 
-    public void registerNewEmail(final String email, String password ) {
+    public void registerNewEmail(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -54,8 +54,7 @@ public class KPFirebase {
 
                         if (!task.isSuccessful()) {
                             Toast.makeText(mContext, R.string.failed, Toast.LENGTH_SHORT).show();
-                        }
-                        else if (task.isSuccessful()) {
+                        } else if (task.isSuccessful()) {
                             userID = mAuth.getCurrentUser().getUid();
                             Log.d(TAG, "onComplete: Authstate changed: " + userID);
                         }
@@ -85,20 +84,20 @@ public class KPFirebase {
                 storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Log.d(TAG, "onSuccess: uri= "+ uri.toString());
+                        Log.d(TAG, "onSuccess: uri= " + uri.toString());
 
                         setProfilePhoto(uri.toString());
                     }
                 });
 
-                Toast.makeText(mContext, "Загрузка завершена" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Загрузка завершена", Toast.LENGTH_SHORT).show();
 
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(mContext, "Ошибка загрузки" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Ошибка загрузки", Toast.LENGTH_SHORT).show();
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override

@@ -71,7 +71,7 @@ public class TripProfileActivity extends AppCompatActivity {
         super.onStart();
         currentUser = mAuth.getCurrentUser();
 
-        initTripDetails();
+        initExtras();
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,7 +87,7 @@ public class TripProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void initTripDetails() {
+    public void initExtras() {
         Intent intent = getIntent();
 
         if (intent.hasExtra("trip_id")) {
@@ -123,17 +123,57 @@ public class TripProfileActivity extends AppCompatActivity {
         TextView tvDepartureDate = (TextView) findViewById(R.id.departureInput);
         TextView tvDescription = (TextView) findViewById(R.id.descriptionInput);
 
-        tvName.setText(" " + tripCreator.getFullName());
+        tvName.setText(" " + tripCreator.getSurname() + " " + tripCreator.getName());
         tvCarModel.setText(requestedTrip.getCar_model());
         tvCarNumber.setText(requestedTrip.getCar_number());
         tvFromPlace.setText(requestedTrip.getFrom_place());
         tvDescription.setText(requestedTrip.getDescription());
-        tvStatus.setText(" " + requestedTrip.getTrip_status());
+        tvStatus.setText(" " + convertStatusToReadable(requestedTrip.getTrip_status()));
         tvWherePlace.setText(" > " + requestedTrip.getWhere_place());
         tvDepartureDate.setText(" " + requestedTrip.getDeparture_date());
 
         KPImageLoader.setImage(tripCreator.getProfile_image(),
                 (ImageView) findViewById(R.id.profile_image), null, "");
+
+        RelativeLayout userPhoto = (RelativeLayout) findViewById(R.id.userPhoto);
+        userPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toUserProfile(tripCreator.getUser_id());
+            }
+        });
+
+        if (!requestedTrip.getTrip_status().equals("CREATED")) {
+            initDriverUI(dataSnapshot);
+        }
+    }
+
+    private void initDriverUI(DataSnapshot dataSnapshot) {
+        Map.Entry<String,String> entry = requestedTrip.getRequests().entrySet().iterator().next();
+
+        String driverId = entry.getKey();
+
+        final UserAccount driver = dataSnapshot
+                .child(getString(R.string.db_user_account))
+                .child(driverId)
+                .getValue(UserAccount.class);
+
+        TextView tvName = (TextView) findViewById(R.id.driverNameInput);
+        TextView tvSurname = (TextView) findViewById(R.id.driverSurnameInput);
+
+        tvName.setText(" : "  +  driver.getName());
+        tvSurname.setText(" : " + driver.getSurname());
+
+        KPImageLoader.setImage(driver.getProfile_image(),
+                (ImageView) findViewById(R.id.driver_image), null, "");
+
+        RelativeLayout driverPhoto = (RelativeLayout) findViewById(R.id.driverPhoto);
+        driverPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toUserProfile(driver.getUser_id());
+            }
+        });
     }
 
     private void toggleUserView(DataSnapshot dataSnapshot) {
@@ -144,10 +184,133 @@ public class TripProfileActivity extends AppCompatActivity {
         }
     }
 
-    public void stepBack(View view) {
-        Log.d(TAG, "onClick: navigation back");
+    private void toggleCreatorPermissions(DataSnapshot dataSnapshot) {
+        Button actionButton = (Button) findViewById(R.id.requestButton);
+        RelativeLayout requestsLayout = (RelativeLayout) findViewById(R.id.requestsLayout);
+        RelativeLayout driverLayout = (RelativeLayout) findViewById(R.id.driverInfoLayout);
 
-        finish();
+        driverLayout.setVisibility(View.VISIBLE);
+
+        switch (requestedTrip.getTrip_status().toUpperCase()) {
+            case "CREATED":
+                actionButton.setBackgroundResource(R.drawable.kp_error_button_plain);
+                actionButton.setText(R.string.trip_cancel);
+                actionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deleteTrip();
+                    }
+                });
+
+                initRequestsList(dataSnapshot);
+
+                driverLayout.setVisibility(View.GONE);
+
+                break;
+            case "PREPARED":
+                actionButton.setVisibility(View.GONE);
+                requestsLayout.setVisibility(View.GONE);
+
+                break;
+            case "ON ROAD":
+                requestsLayout.setVisibility(View.GONE);
+
+                actionButton.setBackgroundResource(R.drawable.kp_button_plain);
+                actionButton.setText(R.string.trip_look_car);
+                actionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        lookTrip();
+                    }
+                });
+
+                break;
+            case "FINISHED":
+                actionButton.setVisibility(View.GONE);
+                requestsLayout.setVisibility(View.GONE);
+
+                break;
+        }
+    }
+
+    private void toggleGuestPermissions() {
+        Button actionButton = (Button) findViewById(R.id.requestButton);
+        RelativeLayout requestsLayout = (RelativeLayout) findViewById(R.id.requestsLayout);
+        RelativeLayout driverLayout = (RelativeLayout) findViewById(R.id.driverInfoLayout);
+
+        driverLayout.setVisibility(View.GONE);
+        requestsLayout.setVisibility(View.GONE);
+        boolean alreadyRequested = false;
+
+        if (requestedTrip.getRequests() != null) {
+            alreadyRequested = requestedTrip.getRequests().containsKey(currentUser.getUid());
+        }
+
+        switch (requestedTrip.getTrip_status().toUpperCase()) {
+            case "CREATED":
+                if (!alreadyRequested) {
+                    actionButton.setBackgroundResource(R.drawable.kp_button_plain);
+                    actionButton.setText(R.string.trip_send_request);
+                    actionButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            requestTrip();
+                        }
+                    });
+                } else {
+                    actionButton.setVisibility(View.GONE);
+                }
+
+                break;
+            case "PREPARED":
+                if (alreadyRequested) {
+                    DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
+                    try {
+                        driverLayout.setVisibility(View.VISIBLE);
+
+                        if (new Date().equals(sdf.parse(requestedTrip.getDeparture_date()))) {
+                            actionButton.setBackgroundResource(R.drawable.kp_button_plain);
+                            actionButton.setText(R.string.trip_start);
+                            actionButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startTrip();
+                                }
+                            });
+                        } else {
+                            actionButton.setVisibility(View.GONE);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    actionButton.setVisibility(View.GONE);
+                }
+
+                break;
+            case "ON ROAD":
+                driverLayout.setVisibility(View.VISIBLE);
+
+                /* TODO */
+//                if (userCoords == tripCoords) {
+//                    actionButton.setBackgroundResource(R.drawable.kp_button_plain);
+//                    actionButton.setText(R.string.trip_finish);
+//                    actionButton.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            finishTrip();
+//                        }
+//                    });
+//                }
+
+                break;
+            case "FINISHED":
+                driverLayout.setVisibility(View.VISIBLE);
+                actionButton.setVisibility(View.GONE);
+
+                break;
+        }
     }
 
     private void deleteTrip() {
@@ -162,8 +325,13 @@ public class TripProfileActivity extends AppCompatActivity {
 
         DatabaseReference tripRef = mRef.child(getString(R.string.db_user_trip)).child(tripId);
         tripRef.setValue(requestedTrip);
+    }
 
-        finish();
+    private void finishTrip() {
+        requestedTrip.setTrip_status("FINISHED");
+
+        DatabaseReference tripRef = mRef.child(getString(R.string.db_user_trip)).child(tripId);
+        tripRef.setValue(requestedTrip);
     }
 
     private void requestTrip() {
@@ -183,94 +351,8 @@ public class TripProfileActivity extends AppCompatActivity {
         // TODO make maps ACTIVITY With Car location
     }
 
-    private void toggleCreatorPermissions(DataSnapshot dataSnapshot) {
-        Button actionButton = (Button) findViewById(R.id.requestButton);
-        RelativeLayout requestsLayout = (RelativeLayout) findViewById(R.id.requestsLayout);
-
-        if (!requestedTrip.getTrip_status().toUpperCase().equals("ON ROAD")
-                && !requestedTrip.getTrip_status().toUpperCase().equals("PREPARED")) {
-            actionButton.setBackgroundResource(R.drawable.kp_error_button_plain);
-            actionButton.setText(R.string.trip_cancel);
-            actionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deleteTrip();
-                }
-            });
-
-            initRequestsList(dataSnapshot);
-
-            return;
-        }
-
-        requestsLayout.setVisibility(View.INVISIBLE);
-
-        if (requestedTrip.getTrip_status().toUpperCase().equals("ON ROAD")) {
-            actionButton.setBackgroundResource(R.drawable.kp_button_plain);
-            actionButton.setText(R.string.trip_look_car);
-            actionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    lookTrip();
-                }
-            });
-
-            return;
-        }
-
-        actionButton.setVisibility(View.INVISIBLE);
-    }
-
-    private void toggleGuestPermissions() {
-        Button actionButton = (Button) findViewById(R.id.requestButton);
-        RelativeLayout requestsLayout = (RelativeLayout) findViewById(R.id.requestsLayout);
-        requestsLayout.setVisibility(View.INVISIBLE);
-        boolean requested = false;
-
-        if (requestedTrip.getRequests() != null) {
-                requested = requestedTrip.getRequests().containsKey(currentUser.getUid());
-        }
-
-        if (requestedTrip.getTrip_status().toUpperCase().equals("CREATED") && !requested) {
-            actionButton.setBackgroundResource(R.drawable.kp_button_plain);
-            actionButton.setText(R.string.trip_send_request);
-            actionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    requestTrip();
-                }
-            });
-
-            return;
-        }
-
-        if (requestedTrip.getTrip_status().toUpperCase().equals("PREPARED") && requested) {
-            DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-
-            try {
-                if (new Date().equals(sdf.parse(requestedTrip.getDeparture_date()))) {
-                    actionButton.setBackgroundResource(R.drawable.kp_button_plain);
-                    actionButton.setText(R.string.trip_start);
-                    actionButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            startTrip();
-                        }
-                    });
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            return;
-        }
-
-        actionButton.setVisibility(View.INVISIBLE);
-    }
-
     private void initRequestsList(DataSnapshot dataSnapshot) {
         final List<RequestListInfo> requestsList = new ArrayList<RequestListInfo>();
-        final ListView requestListView = (ListView) findViewById(R.id.requestsListView);
 
         if (requestedTrip.getRequests() != null) {
             for (Map.Entry<String, String> entryString : requestedTrip.getRequests().entrySet()) {
@@ -296,6 +378,7 @@ public class TripProfileActivity extends AppCompatActivity {
         }
 
         KPRequestAdapter adapter = new KPRequestAdapter(this, R.layout.list_request, requestsList);
+        ListView requestListView = (ListView) findViewById(R.id.requestsListView);
 
         requestListView.setAdapter(adapter);
         requestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -313,11 +396,30 @@ public class TripProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void rejectUser() {
+    public void stepBack(View view) {
+        Log.d(TAG, "onClick: navigation back");
 
+        finish();
     }
 
-    public void acceptUser() {
+    private String convertStatusToReadable(String status) {
+        String readableStatus = status;
 
+        switch (status.toUpperCase()) {
+            case "CREATED":
+                readableStatus = "Поиск водителя";
+                break;
+            case "PREPARED":
+                readableStatus = "Ожидание выезда";
+                break;
+            case "ON ROAD":
+                readableStatus = "В дороге";
+                break;
+            case "FINISHED":
+                readableStatus = "Завершена";
+                break;
+        }
+
+        return readableStatus;
     }
 }

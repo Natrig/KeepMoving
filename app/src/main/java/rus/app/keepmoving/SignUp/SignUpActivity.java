@@ -31,18 +31,16 @@ public class SignUpActivity extends BaseActivity {
     private static final String TAG = "SignUpActivity";
 
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
 
     List<EditText> fields;
     private EditText mNameField;
-    private EditText mSurnameField;
     private EditText mEmailField;
     private EditText mBirthField;
     private EditText mPhoneField;
     private EditText mConfirmField;
+    private EditText mSurnameField;
     private EditText mPasswordField;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +73,7 @@ public class SignUpActivity extends BaseActivity {
         fields.add(mConfirmField);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference();
+        mRef = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -117,14 +114,15 @@ public class SignUpActivity extends BaseActivity {
 
     public void saveUserInfo(String userID) {
         UserAccount userAccount = new UserAccount();
-        userAccount.setEmail(mEmailField.getText().toString());
-        userAccount.setName(mNameField.getText().toString());
-        userAccount.setPhone(mPhoneField.getText().toString());
-        userAccount.setSurname(mSurnameField.getText().toString());
+
+        userAccount.setUser_id(userID);
         userAccount.setProfile_image("none");
         userAccount.setDescription("no description");
-        userAccount.setUser_id(userID);
+        userAccount.setName(mNameField.getText().toString());
+        userAccount.setEmail(mEmailField.getText().toString());
         userAccount.setBirth(mBirthField.getText().toString());
+        userAccount.setPhone(mPhoneField.getText().toString());
+        userAccount.setSurname(mSurnameField.getText().toString());
 
         mRef.child(getString(R.string.db_user_account)).child(userID).setValue(userAccount);
     }

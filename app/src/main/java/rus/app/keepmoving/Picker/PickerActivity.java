@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import rus.app.keepmoving.CreateTrip.CreateActivity;
@@ -87,6 +88,13 @@ public class PickerActivity extends AppCompatActivity {
 
     public void showDatePickerDialog(View view) {
         DialogFragment datePickerFragment = new KPDatePicker();
+
+        if (PREV_ACTIVITY_NUM == CreateActivity.ACTIVITY_NUM) {
+            ((KPDatePicker) datePickerFragment).minDate = new Date();
+        }
+
+        ((KPDatePicker) datePickerFragment).startFrom = new Date();
+
         datePickerFragment.show(getSupportFragmentManager(), "datePicker");
     }
 

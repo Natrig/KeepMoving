@@ -10,12 +10,17 @@ import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import rus.app.keepmoving.R;
 
 public class KPDatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+
+    public Date startFrom;
+    public Date minDate;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,7 +29,23 @@ public class KPDatePicker extends DialogFragment
         int month = 0;
         int day = 1;
 
-        return new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, this, year, month, day);
+        if (startFrom != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startFrom);
+
+            year = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+        }
+
+        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth, this, year, month, day);
+
+        if (minDate != null) {
+            dpd.getDatePicker().setMinDate(minDate.getTime());
+        }
+
+        return dpd;
     }
 
     @Override

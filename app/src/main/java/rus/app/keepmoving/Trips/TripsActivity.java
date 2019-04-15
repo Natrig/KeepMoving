@@ -107,40 +107,39 @@ public class TripsActivity extends AppCompatActivity {
         for (DataSnapshot tripSnapshot : tableSnapshot.getChildren()) {
             Trip trip = tripSnapshot.getValue(Trip.class);
 
-            if (!requestedTrip.getFrom_place().equals(trip.getFrom_place())) {
-                continue;
+            if (trip.getTrip_status().toUpperCase().equals("CREATED")) {
+                if (!requestedTrip.getFrom_place().equals(trip.getFrom_place())) {
+                    continue;
+                }
+
+                if (!requestedTrip.getWhere_place().equals(trip.getWhere_place())) {
+                    continue;
+                }
+
+                if (!requestedTrip.getDeparture_date().equals(trip.getDeparture_date())) {
+                    continue;
+                }
+
+                UserAccount account = dataSnapshot
+                        .child(getString(R.string.db_user_account))
+                        .child(trip.getCreator_id())
+                        .getValue(UserAccount.class);
+
+                TripListInfo tripInfo = new TripListInfo();
+                tripInfo.setTrip_id(tripSnapshot.getKey());
+                tripInfo.setCar_model(trip.getCar_model());
+                tripInfo.setFrom_place(trip.getFrom_place());
+                tripInfo.setWhere_place(trip.getWhere_place());
+                tripInfo.setDeparture_date(trip.getDeparture_date());
+                tripInfo.setCreator_name(account.getSurname() + " " + account.getName());
+
+                mTripListInfo.add(tripInfo);
             }
-
-            if (!requestedTrip.getWhere_place().equals(trip.getWhere_place())) {
-                continue;
-            }
-
-            if (!requestedTrip.getDeparture_date().equals(trip.getDeparture_date())) {
-                continue;
-            }
-
-            TripListInfo tripInfo = new TripListInfo();
-            tripInfo.setTrip_id(tripSnapshot.getKey());
-            tripInfo.setCar_model(trip.getCar_model());
-            tripInfo.setDeparture_date(trip.getDeparture_date());
-            tripInfo.setFrom_place(trip.getFrom_place());
-            tripInfo.setWhere_place(trip.getWhere_place());
-
-            DataSnapshot userSnapshot = dataSnapshot
-                    .child(getString(R.string.db_user_account)).child(trip.getCreator_id());
-
-            tripInfo.setCreator_name(
-                    userSnapshot.getValue(UserAccount.class).getSurname() +
-                            " " +
-                            userSnapshot.getValue(UserAccount.class).getName()
-            );
-
-            mTripListInfo.add(tripInfo);
         }
 
         KPTripAdapter adapter = new KPTripAdapter(this, R.layout.list_trip, mTripListInfo);
-        tripList.setAdapter(adapter);
 
+        tripList.setAdapter(adapter);
         tripList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TripListInfo tripListInfo = mTripListInfo.get(position);

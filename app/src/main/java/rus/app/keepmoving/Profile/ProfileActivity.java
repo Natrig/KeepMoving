@@ -29,24 +29,24 @@ public class ProfileActivity extends BaseActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
 
     private UserAccount userAccount;
 
     private String userID;
     private TextView mNameField;
-    private TextView mSurnameField;
     private TextView mEmailField;
     private TextView mBirthField;
     private TextView mPhoneField;
-    private TextView mDescriptionField;
     private ImageView mImageField;
+    private TextView mSurnameField;
+    private TextView mDescriptionField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        showProgressDialog();
 
         Log.d(TAG, "onCreate: creating.");
 
@@ -61,8 +61,7 @@ public class ProfileActivity extends BaseActivity {
         setupBottomNavBar(ProfileActivity.this, ACTIVITY_NUM);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        mRef = mDatabase.getReference();
+        mRef = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -88,6 +87,8 @@ public class ProfileActivity extends BaseActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        hideProgressDialog();
     }
 
     public void getUserInfo(DataSnapshot dataSnapshot) {

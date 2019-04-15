@@ -89,6 +89,10 @@ public class MenuActivity extends BaseActivity {
         for (DataSnapshot tripSnapshot : tableSnapshot.getChildren()) {
             Trip trip = tripSnapshot.getValue(Trip.class);
 
+            if(trip.getTrip_status().equals("FINISHED")) {
+                continue;
+            }
+
             if (trip.getCreator_id().equals(currentUser.getUid())) {
                 TripListInfo tripListInfo = createTripInfo(tripSnapshot.getKey(), trip, dataSnapshot);
 
@@ -101,7 +105,7 @@ public class MenuActivity extends BaseActivity {
                 }
             }
         }
-        if (myTripListInfo.size() > 0 ) {
+        if (myTripListInfo.size() > 0) {
             KPTripAdapter adapter = new KPTripAdapter(this, R.layout.list_trip, myTripListInfo);
             myTripList.setAdapter(adapter);
 
@@ -114,7 +118,7 @@ public class MenuActivity extends BaseActivity {
             });
         }
 
-        if (requestedTripListInfo.size() > 0 ) {
+        if (requestedTripListInfo.size() > 0) {
             KPTripAdapter requestAdapter = new KPTripAdapter(this, R.layout.list_trip, requestedTripListInfo);
             requestedTripList.setAdapter(requestAdapter);
 
