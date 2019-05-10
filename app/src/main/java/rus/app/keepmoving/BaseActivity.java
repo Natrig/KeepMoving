@@ -105,5 +105,4 @@ public class BaseActivity extends AppCompatActivity {
         KPImageLoader kpImageLoader = new  KPImageLoader(BaseActivity.this);
         ImageLoader.getInstance().init(kpImageLoader.getConfig());
     }
-
 }

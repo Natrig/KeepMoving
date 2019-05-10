@@ -5,6 +5,7 @@
     <!-- Firebase DB names -->
     <string name="db_user_account">user_account</string>
     <string name="db_user_trip">user_trip</string>
+    <string name="db_user_location">user_location</string>
 
     <!-- String related to Login activity -->
     <string name="log_in">Вход</string>
@@ -63,7 +64,6 @@
     <string name="trip_cancel">Отменить поездку</string>
     <string name="trip_start">Начать поездку</string>
     <string name="trip_finish">Завершить поездку</string>
-
 
 
     <!-- String related to Requests -->

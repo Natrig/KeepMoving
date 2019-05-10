@@ -1,5 +1,6 @@
 package rus.app.keepmoving.Login;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import rus.app.keepmoving.BaseActivity;
 import rus.app.keepmoving.Menu.MenuActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.SignUp.SignUpActivity;
+import rus.app.keepmoving.Util.LocationService;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
@@ -57,6 +59,7 @@ public class LoginActivity extends BaseActivity {
 
         if (currentUser != null) {
             Intent intent = new Intent(this, MenuActivity.class);
+            startLocationService();
             startActivity(intent);
             finish();
         }
@@ -107,5 +110,30 @@ public class LoginActivity extends BaseActivity {
         Intent intent = new Intent(this, SignUpActivity.class);
 
         startActivity(intent);
+    }
+
+    private void startLocationService(){
+        if(!isLocationServiceRunning()){
+            Intent serviceIntent = new Intent(this, LocationService.class);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+
+                LoginActivity.this.startForegroundService(serviceIntent);
+            }else{
+                startService(serviceIntent);
+            }
+        }
+    }
+
+    private boolean isLocationServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
+            if("com.codingwithmitch.googledirectionstest.services.LocationService".equals(service.service.getClassName())) {
+                Log.d(TAG, "isLocationServiceRunning: location service is already running.");
+                return true;
+            }
+        }
+        Log.d(TAG, "isLocationServiceRunning: location service is not running.");
+        return false;
     }
 }

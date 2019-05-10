@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Map.MapsActivity" />
+
+    <LinearLayout
+        android:id="@+id/relLayout1"
+        android:weightSum="100"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="10dp"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:paddingTop="4dp"
+            android:id="@+id/fromPlaceInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="45"
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/arrow"
+            android:layout_width="0dp"
+            android:paddingTop="4dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@id/fromPlaceInput"
+            android:layout_centerVertical="true"
+            android:textSize="16dp"
+            android:text=" > "/>
+
+        <TextView
+            android:layout_marginRight="20dp"
+            android:paddingTop="4dp"
+            android:textAlignment="textEnd"
+            android:gravity="end"
+            android:id="@+id/wherePlaceInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="45"
+            android:textColor="@color/colorPrimary"
+            android:layout_toRightOf="@id/arrow"
+            android:layout_centerVertical="true"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

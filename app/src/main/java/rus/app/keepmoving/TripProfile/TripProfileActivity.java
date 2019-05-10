@@ -33,6 +33,7 @@ import java.util.Map;
 import rus.app.keepmoving.Entities.RequestListInfo;
 import rus.app.keepmoving.Entities.Trip;
 import rus.app.keepmoving.Entities.UserAccount;
+import rus.app.keepmoving.Location.LocationActivity;
 import rus.app.keepmoving.Profile.ProfileActivity;
 import rus.app.keepmoving.R;
 import rus.app.keepmoving.Util.KPImageLoader;
@@ -348,6 +349,15 @@ public class TripProfileActivity extends AppCompatActivity {
     }
 
     private void lookTrip() {
+        Intent intent = new Intent(this, LocationActivity.class);
+
+        Map.Entry<String,String> entry = requestedTrip.getRequests().entrySet().iterator().next();
+
+        String driverId = entry.getKey();
+        intent.putExtra("userID", driverId);
+        intent.putExtra("wherePlace", requestedTrip.getWhere_place());
+        intent.putExtra("fromPlace", requestedTrip.getFrom_place());
+        startActivity(intent);
         // TODO make maps ACTIVITY With Car location
     }
 
