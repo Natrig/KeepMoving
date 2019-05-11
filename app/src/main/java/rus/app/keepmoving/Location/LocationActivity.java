@@ -8,8 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +30,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +39,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PendingResult;
+import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.Distance;
+import com.google.maps.model.Duration;
+import com.google.maps.model.TravelMode;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import rus.app.keepmoving.Entities.UserLocation;
 import rus.app.keepmoving.R;
@@ -53,6 +71,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     private String UserId;
     private String wherePlace;
     private String fromPlace;
+    private GeoApiContext mGeoApiContext = null;
 
     private UserLocation userLocation;
 
@@ -69,6 +88,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         mAuth = FirebaseAuth.getInstance();
         mRef = FirebaseDatabase.getInstance().getReference();
+
+        if (mGeoApiContext == null) {
+            mGeoApiContext = new GeoApiContext.Builder()
+                    .apiKey(getString(R.string.google_maps_key))
+                    .build();
+        }
     }
 
 
@@ -152,6 +177,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                             .icon(bitmapDescriptorFromVector(this, R.drawable.ic_trip))
             );
         }
+
+        // FOR TEST ONLY
+        Address destination = getDestinationPoint();
+        LatLng destinationPoint = new LatLng(destination.getLatitude(), destination.getLongitude());
+        Marker marker = mMap.addMarker(new MarkerOptions().position(destinationPoint));
+        calculateDirections(marker);
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
@@ -170,4 +201,103 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+
+    private void calculateDirections(Marker marker) {
+        Log.d(TAG, "calculateDirections: calculating directions.");
+
+        com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
+                marker.getPosition().latitude,
+                marker.getPosition().longitude
+        );
+
+        DirectionsApiRequest directions = new DirectionsApiRequest(mGeoApiContext);
+
+        directions.language("RU");
+        directions.optimizeWaypoints(true);
+        directions.mode(TravelMode.DRIVING);
+        directions.origin(
+                new com.google.maps.model.LatLng(
+                        Double.parseDouble(userLocation.getLatitude()),
+                        Double.parseDouble(userLocation.getLongitude())
+                )
+        );
+
+        Log.d(TAG, "calculateDirections: destination: " + destination.toString());
+
+        directions.destination(destination).setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                Log.d(TAG, "calculateDirections: routes: " + result.routes[0].toString());
+                Log.d(TAG, "calculateDirections: duration: " + result.routes[0].legs[0].duration);
+                Log.d(TAG, "calculateDirections: distance: " + result.routes[0].legs[0].distance);
+                Log.d(TAG, "calculateDirections: geocodedWayPoints: " + result.geocodedWaypoints[0].toString());
+
+                addPolylinesToMap(result);
+                addDirectionInfo(result);
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                Log.e(TAG, "calculateDirections: Failed to get directions: " + e.getMessage());
+            }
+        });
+    }
+
+    private void addPolylinesToMap(final DirectionsResult result) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                DirectionsRoute route = result.routes[0];
+
+                List<com.google.maps.model.LatLng> decodedPath = PolylineEncoding.decode(route.overviewPolyline.getEncodedPath());
+
+                List<LatLng> newDecodedPath = new ArrayList<>();
+
+                // This loops through all the LatLng coordinates of ONE polyline.
+                for (com.google.maps.model.LatLng latLng : decodedPath) {
+                    newDecodedPath.add(new LatLng(
+                            latLng.lat,
+                            latLng.lng
+                    ));
+                }
+
+                Polyline polyline = mMap.addPolyline(new PolylineOptions().addAll(newDecodedPath));
+                polyline.setColor(ContextCompat.getColor(LocationActivity.this, R.color.colorError));
+                polyline.setClickable(true);
+            }
+        });
+    }
+
+    private void addDirectionInfo(final DirectionsResult result) {
+        Duration duration = result.routes[0].legs[0].duration;
+        Distance distance = result.routes[0].legs[0].distance;
+
+        TextView tvTime = (TextView) findViewById(R.id.destinationTimeInput);
+        TextView tvLength = (TextView) findViewById(R.id.destinationDistanceInput);
+
+        tvTime.setText("Оставшееся время : " + duration.humanReadable);
+        tvLength.setText("Дистанция : " + distance.humanReadable);
+    }
+
+    private Address getDestinationPoint() {
+        String searchString = wherePlace;
+
+        Geocoder geocoder = new Geocoder(LocationActivity.this);
+        List<Address> list = new ArrayList<>();
+
+        try {
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (list.size() > 0) {
+            Address address = list.get(0);
+
+            return address;
+        }
+
+        return null;
+    }
+
 }
